@@ -1,0 +1,115 @@
+<div class="card">
+    <div class="table-responsive">
+        <form class="form-inline m-b-10">
+            <button type="button" class="btn btn-success btn-sm" onclick="editArea(0)">添加地区</button>
+            <div class="form-group ">
+                <input type="text" class="form-control form-control-sm m-l-15" id="area_keyword" placeholder="请输入搜索关键词" value="{$keyword}">
+            </div>
+            <button type="button" class="btn btn-success btn-sm m-l-5" onclick="areaList()">搜索</button>
+            <button type="button" class="btn btn-success btn-sm ml-auto" onclick="cacheArea()">更新地区</button>
+            <input type="hidden" id="top_id" value="{$pid}">
+        </form>
+        {neq name='parentName' value=''}
+            <h5>{$parentName}<a class="btn-link blue1 cursor-pointer float-right" onclick="viewArea('{$parentId}')">返回上级</a></h5>
+        {/neq}
+        <table class="table table-bordered table-striped table-sm table-hover text-center">
+            <thead class="thead-light">
+            <tr>
+                <th width="100">排序</th>
+                <th width="100">ID</th>
+                <th>地区名</th>
+                <th width="150">区域代码</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='area_list' id='vo'}
+            <tr>
+                <td>{$vo.sort}</td>
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.areaCode}</td>
+                <td>
+                    <i class="fas fa-edit cursor-pointer" onclick="editArea('{$vo.id}')"></i>
+                    {neq name='vo.namespace' value='area'}
+                    <i class="fas fa-child cursor-pointer m-l-5" onclick="viewArea('{$vo.id}')"></i>
+                    {/neq}
+                    <i class="fas fa-trash cursor-pointer m-l-5" onclick="deleteArea('{$vo.id}')"></i>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        _add_enter_event('area_keyword',areaList);
+    });
+
+    function areaList(){
+        var keyword = $('#area_keyword').val();
+        var top_id = $('#top_id').val();
+        _p_a_load("{:url('/admin/system/areaList?keyword="+keyword+"&pid="+top_id+"','',false)}",'tab1');
+    }
+
+    function editArea(id){
+        var top_id = $('#top_id').val();
+        var url = "{:url('/admin/system/editArea?id="+id+"&pid="+top_id+"','',false)}";
+        _add_movable_popup('edit_area',id>0?'编辑地区':'添加地区',url,['500px','300px'],'',function(){
+            areaList();
+        });
+    }
+
+    function viewArea(id){
+        $('#top_id').val(id);
+        areaList();
+    }
+
+    function deleteArea(id){
+        _systemConfirm('确定删除该地区及下级地区吗？此操作不可撤销！',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "post",
+                    url: "{:url('/admin/system/deleteArea')}",
+                    data: {id:id},
+                    success: function(res){
+                        if(res>0){
+                            areaList();
+                            tip_success('删除成功！');
+                        }else{
+                            tip_error(res,3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
+        });
+    }
+
+    function cacheArea(){
+        _systemConfirm('确定更新地区缓存吗！',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "get",
+                    url: "{:url('/admin/system/cacheArea')}",
+                    data: {},
+                    success: function(res){
+                        if(res=='success'){
+                            location.href="{:url('/admin/system/areaManage')}";
+                            tip_success('更新成功！');
+                        }else{
+                            tip_error(res,3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
+        });
+    }
+</script>

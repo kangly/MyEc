@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{$keywords|default=''}">
+    <meta name="description" content="{$description|default=''}">
+    <meta name="author" content="{$author|default=''}">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.png">
+    <title>Ec Admin</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/js/select2/css/select2.min.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.js/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/gritter/jquery.gritter.min.js"></script>
+    <script type="text/javascript" src="/static/js/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="/static/js/layer/layer.js"></script>
+    <script type="text/javascript" src="/static/js/validator.js/validator.min.js"></script>
+    <script type="text/javascript" src="/static/js/distpicker/distpicker.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/static/js/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var urlLocation = function(url){
+            if(url)
+                setTimeout("location.href = '"+ url + "'", 500);
+        };
+    </script>
+</head>
+<body>
+<div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
+    <header class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="skin5">
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="navbar-brand" href="{:url('/admin/index')}">
+                    <b class="logo-icon p-l-10"><img src="/static/images/logo-icon.png" class="light-logo" /></b>
+                    <span class="logo-text"><img src="/static/images/logo-text.png" class="light-logo" /></span>
+                </a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <ul class="navbar-nav float-left mr-auto">
+                    <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-none d-md-block">便捷入口 <i class="fa fa-angle-down"></i></span>
+                            <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" target="_blank" id="open_new_win" href="{:url('/admin/index')}">新窗口</a>
+                            <a class="dropdown-item" href="{:url('/admin/help')}">使用帮助</a>
+                        </div>
+                    </li>
+                    <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        <form class="app-search position-absolute">
+                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-nav float-right">
+                    <li id="top_loading_mark"><img class="m-t-25 m-r-20" src="/static/images/loading.gif" /></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                            <ul class="list-style-none">
+                                <li>
+                                    <div>
+                                        <a href="javascript:void(0)" class="link border-top">
+                                            <div class="d-flex no-block align-items-center p-10">
+                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                <div class="m-l-10">
+                                                    <h5 class="m-b-0">Event today</h5>
+                                                    <span class="mail-desc">Just a reminder that event</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)" class="link border-top">
+                                            <div class="d-flex no-block align-items-center p-10">
+                                                <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                <div class="m-l-10">
+                                                    <h5 class="m-b-0">Settings</h5>
+                                                    <span class="mail-desc">You can customize this template</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)" class="link border-top">
+                                            <div class="d-flex no-block align-items-center p-10">
+                                                <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
+                                                <div class="m-l-10">
+                                                    <h5 class="m-b-0">Pavan kumar</h5>
+                                                    <span class="mail-desc">Just see the my admin!</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)" class="link border-top">
+                                            <div class="d-flex no-block align-items-center p-10">
+                                                <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                <div class="m-l-10">
+                                                    <h5 class="m-b-0">Luanch Admin</h5>
+                                                    <span class="mail-desc">Just see the my new admin!</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/static/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                        <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                            <div class="dw-user-box">
+                                <div class="u-img"><img src="/static/images/users/1.jpg" alt="user"></div>
+                                <div class="u-text">
+                                    <h4>{$userInfo.username}</h4>
+                                    <p class="text-muted">{$userInfo.email}</p>
+                                    <a href="javascript:void(0)" class="btn btn-rounded btn-success btn-sm">个人中心</a>
+                                </div>
+                            </div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> 账号设置</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> 收件箱</a>
+                            <a class="dropdown-item" href="{:url('/admin/login/logout')}"><i class="fa fa-power-off m-r-5 m-l-5"></i> 注销</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-sidebar" data-sidebarbg="skin5">
+        <div class="scroll-sidebar">
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{:url('/admin/index')}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">工作台</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">系统管理 </span></a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/system/websiteSetup')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 网站设置 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/system/areaManage')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 地区管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/system/adminManage')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 管理员管理 </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-view-module"></i><span class="hide-menu">模块管理 </span></a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/sell')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 供应管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/buy')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 求购管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/sale')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 拍卖管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/bid')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 招标管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/asset')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 资产处置 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/quote')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 行情管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/exhibit')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 展会管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/news')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 资讯管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/goods')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 商城管理 </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">会员管理 </span></a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/member')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 会员管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/company')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 公司管理 </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-google-circles-extended"></i><span class="hide-menu">扩展管理 </span></a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/extend/ad')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 广告管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/extend/page')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 单页管理 </span></a></li>
+                            <li class="sidebar-item m-l-5"><a href="{:url('/admin/extend/link')}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 友情链接 </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{:url('/admin/help')}" aria-expanded="false"><i class="mdi mdi-help"></i><span class="hide-menu">使用帮助</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            {block name="content"}{/block}
+        </div>
+        <footer class="footer text-center"></footer>
+    </div>
+</div>
+</body>
+</html>

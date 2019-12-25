@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="table-responsive">
+        <button type="button" class="btn btn-success btn-sm m-b-10" onclick="editGroup(0)">添加会员组</button>
+        <table class="table table-bordered table-striped table-sm table-hover text-center">
+            <thead class="thead-light">
+            <tr>
+                <th>会员名</th>
+                <th>公司</th>
+                <th>会员组</th>
+                <th>注册时间</th>
+                <th>登录时间</th>
+                <th>登录次数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function groupList(){
+        _p_a_load("{:url('/admin/member/groupList')}",'tab1');
+    }
+
+    function editGroup(id){
+        var title = id>0?'编辑会员组':'添加会员组';
+        var url = "{:url('/admin/member/editGroup?id="+id+"','',false)}";
+        _add_movable_popup('edit_group',title,url,'','',function(){
+            groupList();
+        });
+    }
+</script>

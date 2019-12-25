@@ -1,0 +1,462 @@
+<div class="card m-t-10">
+    <form class="form-horizontal" method="post" id="admin-edit-member-form" action="{:url('/admin/member/saveMember')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger">*</span> 会员组</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="regid" id="regid_1" value="0" checked>
+                        <label class="form-check-label" for="regid_1">企业会员</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="regid" id="regid_2" value="1">
+                        <label class="form-check-label" for="regid_2">个人会员</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="username" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 会员登录名</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="username" id="username" value="{$member.username|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="nickname" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 昵称</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="nickname" id="nickname" value="{$member.nickname|default=''}">
+                </div>
+                <small class="col-form-label gray9">[支持中文]</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label"><span class="text-danger text-danger-password">*</span> 登录密码</label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control" name="password" id="password">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="confirm_password" class="col-sm-3 col-form-label"><span class="text-danger text-danger-password">*</span> 重复登录密码</label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 电子邮件</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="email" id="email" value="{$member.email|default=''}">
+                </div>
+                <small class="col-form-label gray9">[不公开]</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="realName" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 真实姓名</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="realName" id="realName" value="{$member.realName|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger">*</span> 性别</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="gender_0" value="0" checked>
+                        <label class="form-check-label" for="gender_0">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="gender_1" value="1">
+                        <label class="form-check-label" for="gender_1">女</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="areaid" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 所在地区</label>
+                <div class="col-sm-3">
+                    <select name="areaid" class="form-control" id="areaid">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 部门</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="department" id="department" min="0" value="{$member.department|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="career" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 职位</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="career" id="career" min="0" value="{$member.career|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="mobile" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 手机</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="mobile" id="mobile" min="0" value="{$member.mobile|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="qq" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> QQ</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="qq" id="qq" value="{$member.qq|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="weChat" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="weChat" id="weChat" value="{$member.weChat|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="wxqr" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信二维码</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="wxqr" id="wxqr" value="">
+                </div>
+                <a class="col-form-label">上传</a>
+                <a class="col-form-label m-l-5">预览</a>
+                <a class="col-form-label m-l-5">删除</a>
+            </div>
+
+            <div class="form-group row">
+                <label for="msn" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> MSN</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="msn" id="msn" value="{$member.msn|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="ali" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 阿里旺旺</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="ali" id="ali" value="{$member.ali|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="skype" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> Skype</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="skype" id="skype" value="{$member.skype|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger">*</span> 状态</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="state" id="state_0" value="0" checked>
+                        <label class="form-check-label" for="state_0">正常</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="state" id="state_1" value="1">
+                        <label class="form-check-label" for="state_1">禁用</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body card-body-head" style="padding: 0.5rem;">
+            <h6 class="card-title m-b-0">公司资料</h6>
+        </div>
+
+        <div class="card-body p-t-10">
+            <div class="form-group row">
+                <label for="company" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司名称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="company" id="company" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="type" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司类型</label>
+                <div class="col-sm-3">
+                    <select name="type" class="form-control" id="type">
+                        <option value="">请选择</option>
+                        <option value="企业单位">企业单位</option>
+                        <option value="事业单位或社会团体">事业单位或社会团体</option>
+                        <option value="个体经营">个体经营</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="thumb" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 形象图片</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="thumb" id="thumb" value="">
+                    <span class="gray9">建议使用LOGO、办公环境等标志性图片，最佳大小为180px*180px</span>
+                </div>
+                <a class="col-form-label">上传</a>
+                <a class="col-form-label m-l-5">预览</a>
+                <a class="col-form-label m-l-5">删除</a>
+            </div>
+
+            <div class="form-group row">
+                <label for="company_category" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 主营行业</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="company_category">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="business" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 主要经营范围</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="business" id="business" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger text-danger-hide">*</span> 经营模式</label>
+                <div class="col-sm-5">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">制造商</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">贸易商</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">服务商</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                        <label class="form-check-label" for="inlineCheckbox4">其他机构</label>
+                    </div>
+                </div>
+                <small class="gray9">(最多可选2种)</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="size" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 公司规模</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="size">
+                        <option value="">请选择规模</option>
+                        <option value="1-49人">1-49人</option>
+                        <option value="50-99人">50-99人</option>
+                        <option value="100-499人">100-499人</option>
+                        <option value="500-999人">500-999人</option>
+                        <option value="1000-3000人">1000-3000人</option>
+                        <option value="3000-5000人">3000-5000人</option>
+                        <option value="5000-10000人">5000-10000人</option>
+                        <option value="10000人以上">10000人以上</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="size" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 注册资本</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="regunit">
+                        <option value="人民币">人民币</option>
+                        <option value="港元">港元</option>
+                        <option value="台币">台币</option>
+                        <option value="美元">美元</option>
+                        <option value="欧元">欧元</option>
+                        <option value="英镑">英镑</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="capital" id="capital" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="regyear" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司成立年份</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="regyear" id="regyear" value="">
+                </div>
+                <small class="col-form-label gray9">(年份，如：2004)</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="address" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司地址</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="address" id="address" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="postcode" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 邮政编码</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="postcode" id="postcode" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="telephone" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司电话</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="telephone" id="telephone" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fax" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 公司传真</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="fax" id="fax" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="mail" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 公司Email</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="mail" id="mail" value="">
+                </div>
+                <small class="col-form-label gray9">[公开]</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="homepage" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 公司网址</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="homepage" id="homepage" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="gzh" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信公众号</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="gzh" id="gzh" value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="thumb" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 公众号二维码</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="gzhqr" id="gzhqr" value="">
+                </div>
+                <a class="col-form-label">上传</a>
+                <a class="col-form-label m-l-5">预览</a>
+                <a class="col-form-label m-l-5">删除</a>
+            </div>
+
+            <div class="form-group row">
+                <label for="sell" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 销售的产品（服务）</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="sell" id="sell" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">多个产品或服务请用'|'号隔开</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="buy" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 采购的产品（服务）</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="buy" id="buy" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">多个产品或服务请用'|'号隔开</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="content" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 公司介绍</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="content" id="content"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger text-danger-hide">*</span> 会员资料是否完整</label>
+                <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="edittime" id="edittime_1" value="1" checked>
+                        <label class="form-check-label" for="edittime_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="edittime" id="edittime_0" value="0">
+                        <label class="form-check-label" for="edittime_0">否</label>
+                    </div>
+                    <small class="gray9">如果选择是，系统将不再提示会员完善资料</small>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="member_id" id="member_id" value="{$member.id|default=0}">
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var member_id = $('#member_id').val();
+        if(member_id>0){
+            $('.text-danger-password').addClass('text-danger-hide');
+        }
+    });
+
+    function save(callback){
+        if(_trim_assign($('#username'))==''){
+            tip_error('用户名必填！',3);
+            return;
+        }
+        var member_id = $('#member_id').val();
+        var password = _trim_assign($('#password'));
+        var confirm_password = _trim_assign($('#confirm_password'));
+        if(member_id>0){
+            if(password){
+                if(confirm_password==''){
+                    tip_error('重复登录密码必填！',3);
+                    return;
+                }
+                if(password!=confirm_password){
+                    tip_error('两次输入的登录密码不一致！',3);
+                    return;
+                }
+            }
+        }else{
+            if(password==''){
+                tip_error('登录密码必填！',3);
+                return;
+            }
+            if(confirm_password==''){
+                tip_error('重复登录密码必填！',3);
+                return;
+            }
+            if(password!=confirm_password){
+                tip_error('两次输入的登录密码不一致！',3);
+                return;
+            }
+        }
+        if(_trim_assign($('#realName'))==''){
+            tip_error('真实姓名必填！',3);
+            return;
+        }
+        if($("#admin-edit-member-form input[name='gender']:checked").val()=='undefined'){
+            tip_error('性别必填！',3);
+            return;
+        }
+        var email = _trim_assign($('#email'));
+        if(email==''){
+            tip_error('邮箱必填！',3);
+            return;
+        }
+        if(validator.isEmail(email)===false){
+            tip_error('邮箱格式错误!',3);
+            return false;
+        }
+        var mobile = _trim_assign($('#mobile'));
+        if(mobile && validator.isMobilePhone(mobile)===false){
+            tip_error('手机格式错误!',3);
+            return false;
+        }
+        if($("#admin-edit-member-form input[name='state']:checked").val()=='undefined'){
+            tip_error('状态必填！',3);
+            return;
+        }
+        submitTheForm('admin-edit-member-form',function(data){
+            if(data>0){
+                if(callback){
+                    callback();
+                }
+            }
+        });
+    }
+</script>

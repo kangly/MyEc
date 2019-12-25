@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="table-responsive">
+        <button type="button" class="btn btn-success btn-sm m-b-10" onclick="editMember(0)">添加会员</button>
+        <table class="table table-bordered table-striped table-sm table-hover text-center">
+            <thead class="thead-light">
+            <tr>
+                <th>会员名</th>
+                <th>公司</th>
+                <th>会员组</th>
+                <th>注册时间</th>
+                <th>登录时间</th>
+                <th>登录次数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='member_list' id='vo'}
+                <tr>
+                    <td>{$vo.username}</td>
+                    <td>{$vo.company}</td>
+                    <td></td>
+                    <td>{neq name='vo.regTime' value=''}{$vo.regTime|date='Y-m-d H:i'}{/neq}</td>
+                    <td>{neq name='vo.loginTime' value=''}{$vo.loginTime|date='Y-m-d H:i'}{/neq}</td>
+                    <td>{$vo.loginTimes}</td>
+                    <td>
+                        <i class="fas fa-edit" style="cursor: pointer;" onclick="editMember('{$vo.id}')"></i>
+                        <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteMember('{$vo.id}')"></i>
+                    </td>
+                </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$member_list|raw}
+    </div>
+</div>
+
+<script type="text/javascript">
+    function memberList(){
+        _p_a_load("{:url('/admin/member/memberList')}",'tab1');
+    }
+
+    function editMember(id){
+        var title = id>0?'编辑会员':'添加会员';
+        var url = "{:url('/admin/member/editMember?id="+id+"','',false)}";
+        _add_movable_popup('edit_member',title,url,'','',function(){
+            memberList();
+        });
+    }
+    
+    function deleteMember(id){
+        _systemConfirm('确定删除该会员吗？',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "post",
+                    url: "{:url('/admin/member/deleteMember')}",
+                    data: {id:id},
+                    success: function(res){
+                        if(res>0){
+                            memberList();
+                            tip_success('删除成功！');
+                        }else{
+                            tip_error('删除失败！',3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
+        });
+    }
+</script>

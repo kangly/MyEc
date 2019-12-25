@@ -1,0 +1,513 @@
+<div class="card m-t-10">
+    <form class="form-horizontal" method="post" id="admin-edit-group-form" action="{:url('/admin/member/saveGroup')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label for="groupName" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 会员组名称</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="groupName" id="groupName" value="{$group.groupName|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger">*</span> 会员类型</label>
+                <div class="col-sm-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[type]" id="type_1" value="1" checked>
+                        <label class="form-check-label" for="type_1">企业会员</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[type]" id="type_0" value="0">
+                        <label class="form-check-label" for="type_0">个人会员</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3"><span class="text-danger">*</span> 会员模式</label>
+                <div class="col-sm-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[fee_mode]" id="fee_mode_1" value="1" checked>
+                        <label class="form-check-label" for="fee_mode_1">收费会员</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[fee_mode]" id="fee_mode_0" value="0">
+                        <label class="form-check-label" for="fee_mode_0">免费会员</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fee" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 收费设置</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[fee]" id="fee" value="{$member.nickname|default=''}">
+                </div>
+                <small class="col-form-label">元/年</small>
+                <small class="col-form-label gray9 m-l-10">免费会员请填0</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="vip" class="col-sm-3 col-form-label"><span class="text-danger">*</span> VIP指数</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="vip" id="vip" value="{$member.vip|default=''}">
+                </div>
+                <small class="col-form-label gray9">免费会员请填0，收费会员请填1-9数字</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="commission" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 交易佣金</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[commission]" id="commission" value="{$member.vip|default=''}">
+                </div>
+                <small class="col-form-label">%</small>
+                <small class="col-form-label gray9 m-l-10 hide">会员通过商城、供应、团购完成交易后，系统扣除交易额一定比例作为网站服务费用</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="listOrder" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 显示顺序</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="listOrder" id="listOrder" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">数字越小越靠前</small>
+            </div>
+        </div>
+
+        <div class="card-body card-body-head" style="padding: 0.5rem;">
+            <h6 class="card-title m-b-0">会员权限</h6>
+        </div>
+
+        <div class="card-body p-t-10">
+            <div class="form-group row">
+                <label for="groupName" class="col-sm-3 col-form-label">设置说明</label>
+                <div class="col-form-label">数量限制填 0 则表示不限 &nbsp; 填 -1 表示禁止使用</div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许进入商户后台</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[biz]" id="biz_1" value="1" checked>
+                        <label class="form-check-label" for="biz_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[biz]" id="biz_0" value="0">
+                        <label class="form-check-label" for="biz_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许在会员升级页面显示</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[grade]" id="grade_1" value="1" checked>
+                        <label class="form-check-label" for="grade_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[grade]" id="grade_0" value="0">
+                        <label class="form-check-label" for="grade_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许在会员注册页面显示</label>
+                <div class="col-sm-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[reg]" id="reg_1" value="1">
+                        <label class="form-check-label" for="reg_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[reg]" id="reg_0" value="0" checked>
+                        <label class="form-check-label" for="reg_0">否</label>
+                    </div>
+                    <span class="gray9">此设置对VIP会员无效</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="editor" class="col-sm-3 col-form-label">编辑器工具按钮	</label>
+                <div class="col-sm-1">
+                    <select name="setting[editor]" class="form-control" id="editor">
+                        <option value="Default">全部</option>
+                        <option value="Simple" selected="selected">简洁</option>
+                        <option value="Basic">基础</option>
+                    </select>
+                </div>
+                <small class="gray9 hide">全部按钮允许会员编辑源代码和插入FLASH和视频文件 为了防止被恶意利用，建议仅对受信任的会员组开启</small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许上传文件</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[upload]" id="upload_1" value="1" checked>
+                        <label class="form-check-label" for="upload_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[upload]" id="upload_0" value="0">
+                        <label class="form-check-label" for="upload_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="uploadtype" class="col-sm-3 col-form-label">允许上传的文件类型</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="setting[uploadtype]" id="uploadtype" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">用|号隔开文件后缀，留空表示继承网站设置</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="uploadsize" class="col-sm-3 col-form-label">允许上传大小限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[uploadsize]" id="uploadsize" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">Kb (1024Kb=1M) 不填或填0表示继承网站设置</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="uploadlimit" class="col-sm-3 col-form-label">单条信息上传数量限制</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" name="setting[uploadlimit]" id="uploadlimit" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">一条信息内最多上传文件数量限制，0为不限制</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="uploadday" class="col-sm-3 col-form-label">24小时上传数量限制</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" name="setting[uploadday]" id="uploadday" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9 hide">24小时内最大文件上传数量限制，0为不限制 此项会增加服务器压力，且在开启上传记录的情况下有效</small>
+            </div>
+
+            <div class="form-group row">
+                <label for="uploadcredit" class="col-sm-3 col-form-label">上传一张图片扣积分</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" name="setting[uploadcredit]" id="uploadcredit" value="{$member.listOrder|default=''}">
+                </div>
+                <small class="col-form-label gray9">积分不足时将无法上传，0为不限制</small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">产品图片数量限制</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[uploadpt]" id="uploadpt_1" value="1">
+                        <label class="form-check-label" for="uploadpt_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[uploadpt]" id="uploadpt_0" value="0" checked>
+                        <label class="form-check-label" for="uploadpt_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">发布信息需要审核</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[check]" id="check_1" value="1">
+                        <label class="form-check-label" for="check_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[check]" id="check_0" value="0" checked>
+                        <label class="form-check-label" for="check_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">发布信息启用验证码</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[captcha]" id="captcha_1" value="1">
+                        <label class="form-check-label" for="captcha_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[captcha]" id="captcha_0" value="0" checked>
+                        <label class="form-check-label" for="captcha_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">发布信息启用验证码问题</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[question]" id="question_1" value="1">
+                        <label class="form-check-label" for="question_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[question]" id="question_0" value="0" checked>
+                        <label class="form-check-label" for="question_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许申请提现</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[cash]" id="cash_1" value="1" checked>
+                        <label class="form-check-label" for="cash_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[cash]" id="cash_0" value="0">
+                        <label class="form-check-label" for="cash_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许使用客服中心</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[ask]" id="ask_1" value="1" checked>
+                        <label class="form-check-label" for="ask_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[ask]" id="ask_0" value="0">
+                        <label class="form-check-label" for="ask_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许使用商机订阅</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[mail]" id="mail_1" value="1" checked>
+                        <label class="form-check-label" for="mail_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[mail]" id="mail_0" value="0">
+                        <label class="form-check-label" for="mail_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许使用手机短信</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[sms]" id="sms_1" value="1" checked>
+                        <label class="form-check-label" for="sms_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[sms]" id="sms_0" value="0">
+                        <label class="form-check-label" for="sms_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许发送电子邮件</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[sendmail]" id="sendmail_1" value="1" checked>
+                        <label class="form-check-label" for="sendmail_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[sendmail]" id="sendmail_0" value="0">
+                        <label class="form-check-label" for="sendmail_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许管理订单</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[trade_order]" id="trade_order_1" value="1" checked>
+                        <label class="form-check-label" for="trade_order_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[trade_order]" id="trade_order_0" value="0">
+                        <label class="form-check-label" for="trade_order_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许管理团购订单</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[group_order]" id="group_order_1" value="1" checked>
+                        <label class="form-check-label" for="group_order_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[group_order]" id="group_order_0" value="0">
+                        <label class="form-check-label" for="group_order_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许竞价排名</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[spread]" id="spread_1" value="1" checked>
+                        <label class="form-check-label" for="spread_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[spread]" id="spread_0" value="0">
+                        <label class="form-check-label" for="spread_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许广告预定</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[ad]" id="ad_1" value="1" checked>
+                        <label class="form-check-label" for="ad_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[ad]" id="ad_0" value="0">
+                        <label class="form-check-label" for="ad_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">允许发起聊天请求</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[chat]" id="chat_1" value="1" checked>
+                        <label class="form-check-label" for="chat_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[chat]" id="chat_0" value="0">
+                        <label class="form-check-label" for="chat_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3">收件箱数量限制</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[inbox_limit]" id="inbox_limit_1" value="1" checked>
+                        <label class="form-check-label" for="inbox_limit_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[inbox_limit]" id="inbox_limit_0" value="0">
+                        <label class="form-check-label" for="inbox_limit_0">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inbox_limit" class="col-sm-3 col-form-label">收件箱数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[inbox_limit]" id="inbox_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="friend_limit" class="col-sm-3 col-form-label">商友数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[friend_limit]" id="friend_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="favorite_limit" class="col-sm-3 col-form-label">商机收藏数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[favorite_limit]" id="favorite_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="alert_limit" class="col-sm-3 col-form-label">贸易提醒数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[alert_limit]" id="alert_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="address_limit" class="col-sm-3 col-form-label">收货地址数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[address_limit]" id="address_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="express_limit" class="col-sm-3 col-form-label">运费模板数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[express_limit]" id="express_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="promo_limit" class="col-sm-3 col-form-label">优惠活动数量限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[promo_limit]" id="promo_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="message_limit" class="col-sm-3 col-form-label">每日可发站内信限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[message_limit]" id="message_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inquiry_limit" class="col-sm-3 col-form-label">每日询盘次数限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[inquiry_limit]" id="inquiry_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="price_limit" class="col-sm-3 col-form-label">每日报价次数限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[price_limit]" id="price_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="type_limit" class="col-sm-3 col-form-label">自定义分类限制</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="setting[type_limit]" id="type_limit" value="{$member.listOrder|default=''}">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body card-body-head" style="padding: 0.5rem;">
+            <h6 class="card-title m-b-0">公司主页</h6>
+        </div>
+
+        <div class="card-body p-t-10">
+            <div class="form-group row">
+                <label class="col-sm-3">拥有公司主页	</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[homepage]" id="homepage_1" value="1" checked>
+                        <label class="form-check-label" for="homepage_1">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="setting[homepage]" id="homepage_0" value="0">
+                        <label class="form-check-label" for="homepage_0">否</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="member_id" id="member_id" value="{$member.id|default=0}">
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var member_id = $('#member_id').val();
+        if(member_id>0){
+            $('.text-danger-password').addClass('text-danger-hide');
+        }
+    });
+</script>

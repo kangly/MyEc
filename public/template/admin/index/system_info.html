@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-body card-body-head">
+        <h5 class="card-title m-b-0">欢迎管理员，{$userInfo.username}</h5>
+    </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="row mx-0">
+                <td class="text-info col-3">管理级别</td>
+                <td class="col-3">超级管理员</td>
+                <td class="text-info col-3">登陆次数</td>
+                <td class="col-3">{$userInfo.loginTimes}</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">站内信</td>
+                <td class="col-3">收件箱(0)</td>
+                <td class="text-info col-3">登陆时间</td>
+                <td class="col-3">{$userInfo.loginTime|date='Y-m-d H:i'}</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">账户余额</td>
+                <td class="col-3">0.00</td>
+                <td class="text-info col-3">会员积分</td>
+                <td class="col-3">200</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card-body card-body-head">
+        <h5 class="card-title m-b-0">系统信息</h5>
+    </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="row mx-0">
+                <td class="text-info col-3">程序信息</td>
+                <td class="col-9">EcAdmin B2B Version {$Think.config.EC_VERSION} Release {$Think.config.EC_RELEASE} {$Think.config.EC_CHARSET} {$Think.config.EC_LANG}</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">官方网站</td>
+                <td class="col-9"><a target="_blank" href="http://www.kangly.club">http://www.kangly.club</a></td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">支持论坛</td>
+                <td class="col-9"><a target="_blank" href="http://bbs.kangly.club">http://bbs.kangly.club</a></td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">帮助文档</td>
+                <td class="col-9"><a target="_blank" href="http://doc.kangly.club">http://doc.kangly.club</a></td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">服务器时间</td>
+                <td class="col-9">{$sysTime}</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">服务器信息</td>
+                <td class="col-9">{$Think.const.PHP_OS} {$_SERVER['SERVER_SOFTWARE']} [{$_SERVER['SERVER_NAME']|gethostbyname}:{$_SERVER['SERVER_PORT']}]</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">数据库版本</td>
+                <td class="col-9">MySQL {$sqlVersion}</td>
+            </tr>
+            <tr class="row mx-0">
+                <td class="text-info col-3">站点路径</td>
+                <td class="col-9">{$Think.env.ROOT_PATH}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

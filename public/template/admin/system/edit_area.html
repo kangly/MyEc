@@ -1,0 +1,85 @@
+<div class="card m-t-10">
+    <form class="form-horizontal" method="post" id="admin-edit-member-form" action="{:url('/admin/system/saveArea')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label for="distpicker_area" class="col-sm-2 col-form-label">上级地区</label>
+                <div class="form-row" id="distpicker_area">
+                    <div class="col">
+                        <select class="form-control" id="province_id"></select>
+                    </div>
+                    <div class="col">
+                        <select class="form-control" id="city_id"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">地区名称</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="name" id="name" value="{$area.name|default=''}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="areaCode" class="col-sm-2 col-form-label">区域代码</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="areaCode" id="areaCode" value="{$area.areaCode|default=''}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sort" class="col-sm-2 col-form-label">排序</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="sort" id="sort" value="{$area.sort|default=''}">
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" name="_method" value="POST">
+            <input type="hidden" name="area_id" value="{$area.id|default=0}">
+            <input type="hidden" id="area_province_id" name="province_id" value="">
+            <input type="hidden" id="area_city_id" name="city_id" value="">
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $('#distpicker_area').distpicker({
+            province: '{$area_code1}',
+            city: '{$area_code2}'
+        });
+    });
+
+    function save(callback){
+        var province_id = $('#province_id').find("option:selected").attr('data-code');
+        $('#area_province_id').val(province_id);
+        var city_id = $('#city_id').find("option:selected").attr('data-code');
+        $('#area_city_id').val(city_id);
+        if(_trim_assign($('#name'))==''){
+            tip_error('地区名称必填！',3);
+            return;
+        }
+        var areaCode = _trim_assign($('#areaCode'));
+        if(areaCode==''){
+            tip_error('区域代码必填！',3);
+            return;
+        }
+        if(areaCode.length!=6){
+            tip_error('区域代码为6位数字！',3);
+            return;
+        }
+        submitTheForm('admin-edit-member-form',function(data){
+            if(data>0){
+                if(callback){
+                    callback();
+                }
+            }
+        });
+    }
+</script>
