@@ -1,38 +1,17 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4541
-#
-# http://www.sequelpro.com/
-# https://github.com/sequelpro/sequelpro
-#
-# Host: 127.0.0.1 (MySQL 5.7.19-log)
-# Database: ec_admin
-# Generation Time: 2019-09-12 13:42:19 +0000
-# ************************************************************
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
 # Dump of table ec_area
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_area`;
 
 CREATE TABLE `ec_area` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '地区表id',
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '地区表id',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
-  `parentId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
-  `namespace` varchar(10) NOT NULL COMMENT '命名空间，province，city，area',
-  `areaCode` varchar(6) NOT NULL DEFAULT '' COMMENT '行政区域代码',
-  `sort` smallint(4) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-  PRIMARY KEY (`id`)
+  `parentId` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
+  `namespace` varchar(10) NOT NULL COMMENT '命名空间，province、city、area',
+  `areaCode` char(6) NOT NULL DEFAULT '' COMMENT '行政区域代码',
+  `sort` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`parentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区';
 
 LOCK TABLES `ec_area` WRITE;
@@ -3711,10 +3690,10 @@ DROP TABLE IF EXISTS `ec_auth_group`;
 
 CREATE TABLE `ec_auth_group` (
   `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组表id',
-  `title` char(100) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '用户组名称',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `rules` text COMMENT '用户组拥有的规则id，多个规则","隔开',
-  `undetermined_rules` char(50) DEFAULT NULL COMMENT '待定规则id，多个规则","隔开，jstree的checkbox待定状态',
+  `undetermined_rules` varchar(50) DEFAULT NULL COMMENT '待定规则id，多个规则","隔开，jstree的checkbox待定状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3728,8 +3707,8 @@ DROP TABLE IF EXISTS `ec_auth_group_access`;
 CREATE TABLE `ec_auth_group_access` (
   `uid` mediumint(10) unsigned NOT NULL COMMENT '用户id',
   `group_id` mediumint(10) unsigned NOT NULL COMMENT '用户组id',
-  KEY `idx_uid` (`uid`),
-  KEY `idx_group_id` (`group_id`)
+  KEY `uid` (`uid`),
+  KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -3741,15 +3720,15 @@ DROP TABLE IF EXISTS `ec_auth_rule`;
 
 CREATE TABLE `ec_auth_rule` (
   `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '规则表id',
-  `pid` int(10) unsigned DEFAULT '0' COMMENT '父级id',
-  `name` char(100) NOT NULL DEFAULT '' COMMENT '规则唯一标识',
-  `title` char(30) NOT NULL DEFAULT '' COMMENT '规则名称',
+  `pid` mediumint(10) unsigned DEFAULT '0' COMMENT '父级id',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '规则唯一标识',
+  `title` varchar(30) NOT NULL DEFAULT '' COMMENT '规则名称',
   `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'type字段，目前暂时理解为规则类型，例如，1为后台管理类型，2为前台用户类型',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
-  `icon` varchar(20) DEFAULT NULL COMMENT '图标class名称',
-  `order_num` smallint(4) DEFAULT '100' COMMENT '排序',
+  `icon` varchar(20) NOT NULL DEFAULT '' COMMENT '图标class名称',
+  `order_num` smallint(5) DEFAULT '100' COMMENT '排序',
   `is_menu` tinyint(1) DEFAULT '0' COMMENT '是否菜单项',
-  `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证',
+  `condition` varchar(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -3809,7 +3788,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `ec_member_group`;
 
 CREATE TABLE `ec_member_group` (
-  `groupId` smallint(4) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员组id',
+  `groupId` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员组id',
   `groupName` varchar(50) NOT NULL DEFAULT '' COMMENT '会员组名称',
   `vip` smallint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'VIP级别',
   `listOrder` smallint(4) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
@@ -3868,8 +3847,8 @@ CREATE TABLE `ec_sell` (
   `skype` varchar(30) NOT NULL DEFAULT '' COMMENT '联系skype',
   `toTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '过期时间',
   `editor` varchar(50) NOT NULL DEFAULT '' COMMENT '编辑人',
-  `editDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '编辑时间',
-  `addDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+  `editDate` datetime DEFAULT NULL COMMENT '编辑时间',
+  `addDate` datetime DEFAULT NULL COMMENT '添加时间',
   `template` varchar(30) NOT NULL DEFAULT '0' COMMENT '模板',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态,默认0待审,1通过,2拒绝,3过期,4删除',
   `linkUrl` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
@@ -3906,13 +3885,3 @@ CREATE TABLE `ec_setting` (
   `item_value` text NOT NULL COMMENT '键值',
   KEY `item` (`item`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='网站设置';
-
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
