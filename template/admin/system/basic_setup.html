@@ -1,0 +1,256 @@
+<div class="card">
+    <form class="form-horizontal" method="post" id="admin-basic-setup-form" action="{:url('/admin/system/saveBasicSetup')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label for="basic_name" class="col-sm-2 col-form-label">网站名称</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="name" id="basic_name" placeholder="网站名称">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="basic_url" class="col-sm-2 col-form-label">网站地址</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="url" id="basic_url" placeholder="网站地址">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="请添写完整URL地址，例如https://www.ec.com/，注意以 / 结尾" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="basic_logo" class="col-sm-2 col-form-label">网站 Logo</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="logo" id="basic_logo" placeholder="网站 Logo">
+                </div>
+                <div class="m-t-7">
+                    <a class="cursor-pointer" onclick="">上传</a>
+                    <a class="cursor-pointer" onclick="">预览</a>
+                    <a class="cursor-pointer" onclick="">删除</a>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="basic_copyright" class="col-sm-2 col-form-label">版权信息</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" name="copyright" id="basic_copyright" placeholder="版权信息"></textarea>
+                    <small class="font-bold">支持HTML语法，常用代码：版权© &amp;copy; 空格 &amp;nbsp; 换行  &lt;br/&gt;</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="telephone" class="col-sm-2 col-form-label">客服电话</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="telephone" id="telephone" placeholder="客服电话">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="icp_no" class="col-sm-2 col-form-label">ICP备案序号</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="icp_no" id="icp_no" placeholder="ICP备案序号">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">网站状态</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="state" id="basic_state_0" value="0" checked>
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="state" id="basic_state_1" value="1">
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="language" class="col-sm-2 col-form-label">网站默认语言</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="language" id="language">
+                        <option value="zh-cn" selected>简体中文</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">网站默认风格</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="skin" id="skin">
+                        <option value="default" selected>默认风格</option>
+                    </select>
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="位于./skin/目录,一个目录即为一套风格" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">网站默认模板</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="template" id="template">
+                        <option value="default" selected>默认模板</option>
+                    </select>
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="位于./template/目录,一个目录即为一套模板" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">手机默认模板</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="template_mobile" id="template_mobile">
+                        <option value="default" selected>手机模板</option>
+                    </select>
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="位于./template/目录,一个目录即为一套模板" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">网页编辑器</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="editor" id="editor">
+                        <option value="ueditor" selected>UEditor</option>
+                    </select>
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="位于./member/editor/目录,一个目录即为一套模板" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">VIP会员名称</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="com_vip" id="com_vip" placeholder="VIP会员名称" value="VIP">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">真实货币名称</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="money_name" id="money_name" placeholder="真实货币名称" value="资金">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">真实货币单位</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="money_unit" id="money_unit" placeholder="真实货币单位" value="元">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">真实货币符号</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="money_sign" id="money_sign" placeholder="真实货币符号" value="￥">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">虚拟积分名称</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="credit_name" id="credit_name" placeholder="虚拟积分名称" value="积分">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">虚拟积分单位</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="credit_unit" id="credit_unit" placeholder="虚拟积分单位" value="点">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">小额免密支付</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="quick_pay" id="quick_pay" placeholder="小额免密支付" value="200">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="请填写数字，小于此额度的支付无需用户输入支付密码" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">购物车最大容量</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="max_cart" id="max_cart" placeholder="购物车最大容量" value="50">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="请填写数字，如果未启用商城功能，请设置为0" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skin" class="col-sm-2 col-form-label">后台左侧栏宽度</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="admin_left" id="admin_left" placeholder="后台左侧栏宽度" value="218">
+                </div>
+                <div class="m-t-7">px</div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">即时通讯站内交谈</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_web" id="im_web_0" value="0" checked>
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_web" id="im_web_1" value="1">
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">即时通讯QQ</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_qq" id="im_qq_0" value="0" checked>
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_qq" id="im_qq_1" value="1">
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">即时通讯微信</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_wechat" id="im_wechat_0" value="0" checked>
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_wechat" id="im_wechat_1" value="1">
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">即时通讯阿里旺旺</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_ali" id="im_ali_0" value="0" checked>
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_ali" id="im_ali_1" value="1">
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">即时通讯Skype</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_skype" id="im_skype_0" value="0">
+                        <label class="form-check-label" for="basic_state_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="im_skype" id="im_skype_1" value="1" checked>
+                        <label class="form-check-label" for="basic_state_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body">
+                <button type="button" class="btn btn-success btn-sm" onclick="saveBasicSetup()">保存</button>
+            </div>
+        </div>
+        <input type="hidden" name="_method" value="POST">
+    </form>
+</div>
+
+<script type="text/javascript">
+    function saveBasicSetup(){
+        submitTheForm('admin-basic-setup-form',function(data){
+            if(data>0){}
+        });
+    }
+</script>

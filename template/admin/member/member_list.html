@@ -19,9 +19,9 @@
                     <td>{$vo.username}</td>
                     <td>{$vo.company}</td>
                     <td></td>
-                    <td>{neq name='vo.regTime' value=''}{$vo.regTime|date='Y-m-d H:i'}{/neq}</td>
-                    <td>{neq name='vo.loginTime' value=''}{$vo.loginTime|date='Y-m-d H:i'}{/neq}</td>
-                    <td>{$vo.loginTimes}</td>
+                    <td>{neq name='vo.reg_time' value=''}{$vo.reg_time|date='Y-m-d H:i'}{/neq}</td>
+                    <td>{neq name='vo.login_time' value=''}{$vo.login_time|date='Y-m-d H:i'}{/neq}</td>
+                    <td>{$vo.login_times}</td>
                     <td>
                         <i class="fas fa-edit" style="cursor: pointer;" onclick="editMember('{$vo.id}')"></i>
                         <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteMember('{$vo.id}')"></i>

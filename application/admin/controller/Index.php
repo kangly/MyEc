@@ -16,25 +16,45 @@ use think\Db;
  */
 class Index extends Admin
 {
+    /**
+     * 工作台
+     * @return mixed
+     */
     public function index()
     {
         return $this->fetch();
     }
 
+    /**
+     * 系统首页
+     * @return mixed
+     */
     public function systemInfo()
     {
-        $sqlVersion = Db::query('SELECT VERSION() version;');//MySQL版本
-        $this->assign('sqlVersion',$sqlVersion[0]['version']);
+        $sqlVersion = Db::query('SELECT VERSION() version;');
+        $this->assign('sqlVersion',$sqlVersion[0]['version']);//MySQL版本
         $this->assign('sysTime',_time());//系统当前时间
 
         return $this->fetch();
     }
 
+    /**
+     * 修改密码
+     * @return mixed
+     */
     public function changePassword()
     {
         return $this->fetch();
     }
 
+    /**
+     * 保存修改密码
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws \think\exception\PDOException
+     */
     public function saveChangePassword()
     {
         if(request()->isPost())
@@ -42,7 +62,6 @@ class Index extends Admin
             $old_password = input('post.old_password',null,'trim');
             $new_password = input('post.new_password',null,'trim');
             $confirm_password = input('post.confirm_password',null,'trim');
-
             $member = model('admin/Member');
             $result = $member->validate_password($old_password,$new_password,$confirm_password);
             if($result)

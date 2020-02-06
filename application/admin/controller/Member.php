@@ -20,7 +20,7 @@ class Member extends Admin
     //Db静态调用
     public function memberList()
     {
-        $fields = 'id,username,company,regTime,loginTime,loginTimes';
+        $fields = 'id,username,company,reg_time,login_time,login_times';
         $member_list = Db::name('member')->field($fields)->where('state',0)->paginate(20);
         $this->assign('member_list',$member_list);
 
@@ -39,7 +39,7 @@ class Member extends Admin
             $this->assign('member',$member);
         }
 
-        echo $this->fetch();
+        return $this->fetch();
     }
 
     public function saveMember()
@@ -51,11 +51,11 @@ class Member extends Admin
             $password = input('post.password',null,'trim');
             $confirm_password = input('post.confirm_password',null,'trim');
             $nickname = input('post.nickname',null,'trim');
-            $realName = input('post.realName',null,'trim');
+            $realName = input('post.real_name',null,'trim');
             $gender = input('post.gender',0);
             $email = input('post.email',null,'trim');
             $mobile = input('post.mobile',null,'trim');
-            $weChat = input('post.weChat',null,'trim');
+            $weChat = input('post.wechat',null,'trim');
             $qq = input('post.qq',null,'trim');
             $msn = input('post.msn',null,'trim');
             $ali = input('post.ali',null,'trim');
@@ -119,11 +119,11 @@ class Member extends Admin
                 $save_data = [
                     'username' => $username,
                     'nickname' => $nickname,
-                    'realName' => $realName,
+                    'real_name' => $realName,
                     'gender' => $gender,
                     'email' => $email,
                     'mobile' => $mobile,
-                    'weChat' => $weChat,
+                    'wechat' => $weChat,
                     'qq' => $qq,
                     'msn' => $msn,
                     'ali' => $ali,
@@ -138,9 +138,9 @@ class Member extends Admin
                     Db::name('member')->where('id',$member_id)->update($save_data);
                 }else{
                     $save_data['password'] = md5($password);
-                    $save_data['regIp'] = request()->ip();
-                    $save_data['regTime'] = _time();
-                    $save_data['createTime'] = _time();
+                    $save_data['reg_ip'] = request()->ip();
+                    $save_data['reg_time'] = _time();
+                    $save_data['create_time'] = _time();
                     Db::name('member')->where('id',$member_id)->insert($save_data);
                 }
 
@@ -174,7 +174,7 @@ class Member extends Admin
 
     public function editGroup()
     {
-        echo $this->fetch();
+        return $this->fetch();
     }
 
     public function saveGroup()

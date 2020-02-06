@@ -24,11 +24,11 @@
                 <td></td>
                 <td>{$vo.price}</td>
                 <td>{$vo.username}</td>
-                <td>{$vo.addDate}</td>
+                <td>{$vo.add_date}</td>
                 <td>{$vo.hits}</td>
                 <td>
-                    <i class="fas fa-edit" style="cursor: pointer;" onclick="editSell('{$vo.id}')"></i>
-                    <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteSell('{$vo.id}')"></i>
+                    <i class="fas fa-edit cursor-pointer" onclick="editSell('{$vo.id}')"></i>
+                    <i class="fas fa-trash cursor-pointer" onclick="deleteSell('{$vo.id}')"></i>
                 </td>
             </tr>
             {/volist}

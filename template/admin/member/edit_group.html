@@ -2,9 +2,9 @@
     <form class="form-horizontal" method="post" id="admin-edit-group-form" action="{:url('/admin/member/saveGroup')}">
         <div class="card-body p-t-0">
             <div class="form-group row">
-                <label for="groupName" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 会员组名称</label>
+                <label for="group_name" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 会员组名称</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="groupName" id="groupName" value="{$group.groupName|default=''}">
+                    <input type="text" class="form-control" name="group_name" id="group_name" value="{$group.name|default=''}">
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
             <div class="form-group row">
                 <label for="listOrder" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 显示顺序</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="listOrder" id="listOrder" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="sort" id="sort" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">数字越小越靠前</small>
             </div>
@@ -77,7 +77,7 @@
 
         <div class="card-body p-t-10">
             <div class="form-group row">
-                <label for="groupName" class="col-sm-3 col-form-label">设置说明</label>
+                <label class="col-sm-3 col-form-label">设置说明</label>
                 <div class="col-form-label">数量限制填 0 则表示不限 &nbsp; 填 -1 表示禁止使用</div>
             </div>
 
@@ -153,7 +153,7 @@
             <div class="form-group row">
                 <label for="uploadtype" class="col-sm-3 col-form-label">允许上传的文件类型</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="setting[uploadtype]" id="uploadtype" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[uploadtype]" id="uploadtype" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">用|号隔开文件后缀，留空表示继承网站设置</small>
             </div>
@@ -161,7 +161,7 @@
             <div class="form-group row">
                 <label for="uploadsize" class="col-sm-3 col-form-label">允许上传大小限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[uploadsize]" id="uploadsize" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[uploadsize]" id="uploadsize" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">Kb (1024Kb=1M) 不填或填0表示继承网站设置</small>
             </div>
@@ -169,7 +169,7 @@
             <div class="form-group row">
                 <label for="uploadlimit" class="col-sm-3 col-form-label">单条信息上传数量限制</label>
                 <div class="col-sm-1">
-                    <input type="text" class="form-control" name="setting[uploadlimit]" id="uploadlimit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[uploadlimit]" id="uploadlimit" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">一条信息内最多上传文件数量限制，0为不限制</small>
             </div>
@@ -177,7 +177,7 @@
             <div class="form-group row">
                 <label for="uploadday" class="col-sm-3 col-form-label">24小时上传数量限制</label>
                 <div class="col-sm-1">
-                    <input type="text" class="form-control" name="setting[uploadday]" id="uploadday" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[uploadday]" id="uploadday" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9 hide">24小时内最大文件上传数量限制，0为不限制 此项会增加服务器压力，且在开启上传记录的情况下有效</small>
             </div>
@@ -185,7 +185,7 @@
             <div class="form-group row">
                 <label for="uploadcredit" class="col-sm-3 col-form-label">上传一张图片扣积分</label>
                 <div class="col-sm-1">
-                    <input type="text" class="form-control" name="setting[uploadcredit]" id="uploadcredit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[uploadcredit]" id="uploadcredit" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">积分不足时将无法上传，0为不限制</small>
             </div>
@@ -403,77 +403,77 @@
             <div class="form-group row">
                 <label for="inbox_limit" class="col-sm-3 col-form-label">收件箱数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[inbox_limit]" id="inbox_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[inbox_limit]" id="inbox_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="friend_limit" class="col-sm-3 col-form-label">商友数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[friend_limit]" id="friend_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[friend_limit]" id="friend_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="favorite_limit" class="col-sm-3 col-form-label">商机收藏数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[favorite_limit]" id="favorite_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[favorite_limit]" id="favorite_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="alert_limit" class="col-sm-3 col-form-label">贸易提醒数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[alert_limit]" id="alert_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[alert_limit]" id="alert_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="address_limit" class="col-sm-3 col-form-label">收货地址数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[address_limit]" id="address_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[address_limit]" id="address_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="express_limit" class="col-sm-3 col-form-label">运费模板数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[express_limit]" id="express_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[express_limit]" id="express_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="promo_limit" class="col-sm-3 col-form-label">优惠活动数量限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[promo_limit]" id="promo_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[promo_limit]" id="promo_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="message_limit" class="col-sm-3 col-form-label">每日可发站内信限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[message_limit]" id="message_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[message_limit]" id="message_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inquiry_limit" class="col-sm-3 col-form-label">每日询盘次数限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[inquiry_limit]" id="inquiry_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[inquiry_limit]" id="inquiry_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="price_limit" class="col-sm-3 col-form-label">每日报价次数限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[price_limit]" id="price_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[price_limit]" id="price_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="type_limit" class="col-sm-3 col-form-label">自定义分类限制</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="setting[type_limit]" id="type_limit" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="setting[type_limit]" id="type_limit" value="{$member.sort|default=''}">
                 </div>
             </div>
         </div>

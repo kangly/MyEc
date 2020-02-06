@@ -18,7 +18,10 @@ use think\facade\Session;
  */
 class Login extends Controller
 {
-    //登录界面
+    /**
+     * 登录
+     * @return mixed
+     */
     public function index()
     {
         if(is_login()){
@@ -28,7 +31,11 @@ class Login extends Controller
         return $this->fetch();
     }
 
-    //验证登录
+    /**
+     * 登录验证
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
     public function login()
     {
         $url = url('/admin/index');
@@ -40,7 +47,6 @@ class Login extends Controller
         {
             $username = input('post.username');
             $password = input('post.password');
-
             $member = model('admin/Member');
             $member_data = $member->login($username,$password);
             if(!$member_data){
@@ -50,9 +56,9 @@ class Login extends Controller
             }
 
             $save_data = [
-                'loginIp'=>request()->ip(),
-                'loginTime'=>_time(),
-                'loginTimes'=>$member_data['loginTimes']+1
+                'login_ip'=>request()->ip(),
+                'login_time'=>_time(),
+                'login_times'=>$member_data['login_times']+1
             ];
             $member->where('id','=',$member_data['id'])->update($save_data);
 
@@ -66,19 +72,22 @@ class Login extends Controller
         }
     }
 
-    //退出系统
+    /**
+     * 退出登录
+     */
     public function logout()
     {
         $this->clearCache();
         $this->redirect(url('/admin/login'));
     }
 
-    //清空session
+    /**
+     * 清空登录session
+     */
     public function clearCache()
     {
         if(is_login()){
-            $prefix = Config::get('session.prefix');
-            Session::clear($prefix);
+            Session::clear(Config::get('session.prefix'));
         }
     }
 }

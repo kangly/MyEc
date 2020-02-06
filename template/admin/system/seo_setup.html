@@ -1,0 +1,97 @@
+<div class="card">
+    <form class="form-horizontal" method="post" id="admin-seo-setup-form" action="{:url('/admin/system/saveSeoSetup')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label for="seo_delimiter" class="col-sm-2 text-left control-label col-form-label">标题分隔符</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="seo_delimiter" id="seo_delimiter" placeholder="标题分隔符">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="seo_title" class="col-sm-2 text-left control-label col-form-label">Title(网站标题)</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="seo_title" id="seo_title" placeholder="Title(网站标题)">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="seo_keywords" class="col-sm-2 text-left control-label col-form-label">Meta Keywords<br>(网页关键词)</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="seo_keywords" id="seo_keywords" placeholder="Meta Keywords (网页关键词)"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="seo_description" class="col-sm-2 text-left control-label col-form-label">Meta Description<br>(网页描述)</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="seo_description" id="seo_description" placeholder="Meta Description (网页描述)"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="seo_delimiter" class="col-sm-2 text-left control-label col-form-label">目录首页文件名</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="seo_index" id="seo_index" placeholder="目录首页文件名" value="index">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="language" class="col-sm-2 col-form-label">生成文件扩展名</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="file_ext" id="file_ext">
+                        <option value="html" selected>.html</option>
+                        <option value="htm">.htm</option>
+                        <option value="shtm">.shtm</option>
+                        <option value="shtml">.shtml</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">网站首页生成html</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="index_html" id="index_html_0" value="0" checked>
+                        <label class="form-check-label" for="index_html_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="index_html" id="index_html_1" value="1">
+                        <label class="form-check-label" for="index_html_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">URL Rewrite(伪静态)</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rewrite" id="rewrite_0" value="0" checked>
+                        <label class="form-check-label" for="rewrite_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rewrite" id="rewrite_1" value="1">
+                        <label class="form-check-label" for="rewrite_1">关闭</label>
+                    </div>
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="请确认服务器已做过规则配置，否则请勿开启<br/>ReWrite规则见帮助文档<br/>请点击下面的地址，如果可以正常显示，说明规则配置成功<br/><a href=index-htm-url-rule.html target=_blank>index-htm-url-rule.html</a>" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="seo_delimiter" class="col-sm-2 text-left control-label col-form-label">公司主页绑定二级域名</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="com_domain" id="com_domain" placeholder="公司主页绑定二级域名" value="">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="如果填写 .destoon.com 同时需要将域名泛解析 *.destoon.com 指向服务器IP，并且在服务器端绑定泛域名至 网站根目录 或者 网站根目录/company 目录，生成的主页形式为username.destoon.com<br/>如果填写 i.destoon.com 同时需要将域名泛解析 i.destoon.com 指向服务器IP，并且在服务器端绑定域名至网站根目录/company 目录，生成的主页形式为i.destoon.com/username/(注：此方式必须支持伪静态)" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body">
+                <button type="button" class="btn btn-success btn-sm" onclick="saveSeoSetup()">保存</button>
+            </div>
+        </div>
+        <input type="hidden" name="_method" value="POST">
+    </form>
+</div>
+
+<script type="text/javascript">
+    function saveSeoSetup(){
+        submitTheForm('admin-seo-setup-form',function(data){
+            if(data>0){}
+        });
+    }
+</script>

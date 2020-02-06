@@ -32,6 +32,6 @@ return [
     'taglib_begin' => '{',
     // 标签库标签结束标记
     'taglib_end'   => '}',
-    //视图分离 视图根目录所在路径 入口文件在public下
-    'view_base' => __DIR__ . '/../public/template/',
+    //视图分离 视图根目录所在路径 项目根目录template
+    'view_base' => __DIR__ . '/../template/',
 ];

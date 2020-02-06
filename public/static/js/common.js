@@ -79,10 +79,6 @@ $(function() {
     });
     $('#open_new_win').attr('href',location.href);
 
-    $('.message-center, .customizer-body, .scrollable').perfectScrollbar({
-        wheelPropagation: !0
-    });
-
     $("body, .page-wrapper").trigger("resize");
     $(".page-wrapper").show();
 
@@ -875,4 +871,11 @@ function _systemConfirm(title,callback){
         }
         layer.close(index);
     });
+}
+
+function _systemTips(obj){
+    layer.open({
+        title: '系統提示',
+        content: $(obj).attr('data-original-title')
+    });   
 }

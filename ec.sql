@@ -1,23 +1,19 @@
-# Dump of table ec_area
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `ec_area`;
 
 CREATE TABLE `ec_area` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '地区表id',
+  `pid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
-  `parentId` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
-  `namespace` varchar(10) NOT NULL COMMENT '命名空间，province、city、area',
-  `areaCode` char(6) NOT NULL DEFAULT '' COMMENT '行政区域代码',
+  `namespace` varchar(8) NOT NULL DEFAULT '' COMMENT '命名空间，province、city、area',
+  `area_code` char(6) NOT NULL DEFAULT '' COMMENT '区域代码',
   `sort` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`),
-  KEY `pid` (`parentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区';
+  KEY `pid` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ec_area` WRITE;
-/*!40000 ALTER TABLE `ec_area` DISABLE KEYS */;
 
-INSERT INTO `ec_area` (`id`, `name`, `parentId`, `namespace`, `areaCode`, `sort`)
+INSERT INTO `ec_area` (`id`, `name`, `pid`, `namespace`, `area_code`, `sort`)
 VALUES
 	(1,'北京市',0,'province','110000',0),
 	(2,'天津市',0,'province','120000',0),
@@ -3679,42 +3675,27 @@ VALUES
 	(3658,'五家渠市',377,'area','659004',0),
 	(3659,'铁门关市',377,'area','659006',0);
 
-/*!40000 ALTER TABLE `ec_area` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-# Dump of table ec_auth_group
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_auth_group`;
 
 CREATE TABLE `ec_auth_group` (
-  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组表id',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '用户组名称',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
-  `rules` text COMMENT '用户组拥有的规则id，多个规则","隔开',
-  `undetermined_rules` varchar(50) DEFAULT NULL COMMENT '待定规则id，多个规则","隔开，jstree的checkbox待定状态',
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组表id',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：1正常、0禁用',
+  `rules` text COMMENT '用户组拥有的规则id，多个规则用英文","隔开',
+  `undetermined_rules` varchar(100) NOT NULL DEFAULT '' COMMENT '待定规则id，多个规则用英文","隔开，jstree的checkbox待定状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table ec_auth_group_access
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_auth_group_access`;
 
 CREATE TABLE `ec_auth_group_access` (
-  `uid` mediumint(10) unsigned NOT NULL COMMENT '用户id',
-  `group_id` mediumint(10) unsigned NOT NULL COMMENT '用户组id',
+  `uid` int(10) unsigned NOT NULL COMMENT '用户id',
+  `group_id` smallint(5) unsigned NOT NULL COMMENT '用户组id',
   KEY `uid` (`uid`),
   KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table ec_auth_rule
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_auth_rule`;
 
@@ -3723,20 +3704,16 @@ CREATE TABLE `ec_auth_rule` (
   `pid` mediumint(10) unsigned DEFAULT '0' COMMENT '父级id',
   `name` varchar(100) NOT NULL DEFAULT '' COMMENT '规则唯一标识',
   `title` varchar(30) NOT NULL DEFAULT '' COMMENT '规则名称',
-  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'type字段，目前暂时理解为规则类型，例如，1为后台管理类型，2为前台用户类型',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
+  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '目前暂时理解为规则类型，1后台管理类型、2前台用户类型',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：1正常、0禁用',
   `icon` varchar(20) NOT NULL DEFAULT '' COMMENT '图标class名称',
-  `order_num` smallint(5) DEFAULT '100' COMMENT '排序',
+  `sort` smallint(5) DEFAULT '100' COMMENT '排序',
   `is_menu` tinyint(1) DEFAULT '0' COMMENT '是否菜单项',
   `condition` varchar(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证',
   PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table ec_member
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_member`;
 
@@ -3746,24 +3723,24 @@ CREATE TABLE `ec_member` (
   `company` varchar(100) NOT NULL DEFAULT '' COMMENT '公司名',
   `email` varchar(100) NOT NULL DEFAULT '' COMMENT '邮箱',
   `mobile` varchar(11) NOT NULL DEFAULT '' COMMENT '手机号',
-  `realName` varchar(50) NOT NULL DEFAULT '' COMMENT '真实姓名',
+  `real_name` varchar(50) NOT NULL DEFAULT '' COMMENT '真实姓名',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `password` char(32) NOT NULL DEFAULT '' COMMENT '密码',
   `gender` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别,默认0男,1女',
   `online` tinyint(1) NOT NULL DEFAULT '0' COMMENT '在线状态,默认0隐身,1在线',
-  `weChat` varchar(100) NOT NULL DEFAULT '' COMMENT '微信号',
-  `qq` varchar(100) NOT NULL DEFAULT '' COMMENT 'qq号',
-  `msn` varchar(100) NOT NULL DEFAULT '' COMMENT 'msn号',
-  `ali` varchar(100) NOT NULL DEFAULT '' COMMENT '阿里旺旺号',
-  `skype` varchar(100) NOT NULL DEFAULT '' COMMENT 'skype号',
+  `wechat` varchar(50) NOT NULL DEFAULT '' COMMENT '微信号',
+  `qq` varchar(50) NOT NULL DEFAULT '' COMMENT 'qq号',
+  `msn` varchar(50) NOT NULL DEFAULT '' COMMENT 'msn号',
+  `ali` varchar(50) NOT NULL DEFAULT '' COMMENT '阿里旺旺号',
+  `skype` varchar(50) NOT NULL DEFAULT '' COMMENT 'skype号',
   `avatar` varchar(300) NOT NULL DEFAULT '' COMMENT '头像',
   `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态,默认0正常,1禁用',
-  `regIp` varchar(15) NOT NULL DEFAULT '' COMMENT '注册ip',
-  `regTime` datetime DEFAULT NULL COMMENT '注册时间',
-  `loginIp` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
-  `loginTime` datetime DEFAULT NULL COMMENT '最后登录时间',
-  `loginTimes` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录次数',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `reg_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '注册ip',
+  `reg_time` datetime DEFAULT NULL COMMENT '注册时间',
+  `login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
+  `login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `login_times` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录次数',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `email` (`email`),
@@ -3771,42 +3748,31 @@ CREATE TABLE `ec_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ec_member` WRITE;
-/*!40000 ALTER TABLE `ec_member` DISABLE KEYS */;
 
-INSERT INTO `ec_member` (`id`, `username`, `company`, `email`, `mobile`, `realName`, `nickname`, `password`, `gender`, `online`, `weChat`, `qq`, `msn`, `ali`, `skype`, `avatar`, `state`, `regIp`, `regTime`, `loginIp`, `loginTime`, `loginTimes`, `createTime`)
+INSERT INTO `ec_member` (`id`, `username`, `company`, `email`, `mobile`, `real_name`, `nickname`, `password`, `gender`, `online`, `wechat`, `qq`, `msn`, `ali`, `skype`, `avatar`, `state`, `reg_ip`, `reg_time`, `login_ip`, `login_time`, `login_times`, `create_time`)
 VALUES
 	(1,'admin','加里敦科技有限公司','371976974@qq.com','15227188888','小康','admin','e10adc3949ba59abbe56e057f20f883e',0,0,'','','','','','',0,'127.0.0.1','2019-08-12 09:40:33','127.0.0.1','2019-09-12 09:31:01',22,'2019-07-29 11:30:07'),
 	(2,'test','测试有限公司','614797580@qq.com','','小李','test','e10adc3949ba59abbe56e057f20f883e',0,0,'','','','','','',0,'127.0.0.1','2019-08-26 11:30:07','',NULL,0,'2019-08-26 11:30:07');
 
-/*!40000 ALTER TABLE `ec_member` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-# Dump of table ec_member_group
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_member_group`;
 
 CREATE TABLE `ec_member_group` (
-  `groupId` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员组id',
-  `groupName` varchar(50) NOT NULL DEFAULT '' COMMENT '会员组名称',
-  `vip` smallint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'VIP级别',
-  `listOrder` smallint(4) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-  PRIMARY KEY (`groupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员组';
-
-
-
-# Dump of table ec_sell
-# ------------------------------------------------------------
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员组id',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '会员组名称',
+  `vip` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'VIP级别',
+  `sort` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ec_sell`;
 
 CREATE TABLE `ec_sell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应表id',
-  `catId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '行业分类id',
-  `typeId` smallint(2) unsigned NOT NULL DEFAULT '0' COMMENT '类型id',
-  `areaId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
+  `cat_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '行业分类id',
+  `type_id` smallint(2) unsigned NOT NULL DEFAULT '0' COMMENT '类型id',
+  `area_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
   `level` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '级别',
   `elite` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '公司主页推荐',
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
@@ -3821,48 +3787,43 @@ CREATE TABLE `ec_sell` (
   `brand` varchar(100) NOT NULL DEFAULT '' COMMENT '品牌',
   `unit` varchar(10) NOT NULL DEFAULT '' COMMENT '单位',
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格',
-  `minAmount` float unsigned NOT NULL DEFAULT '0' COMMENT '起定量',
+  `min_amount` float unsigned NOT NULL DEFAULT '0' COMMENT '起定量',
   `amount` float unsigned NOT NULL DEFAULT '0' COMMENT '供货总量',
   `days` smallint(3) unsigned NOT NULL DEFAULT '0' COMMENT '供货时间',
-  `tag` varchar(100) NOT NULL DEFAULT '' COMMENT '产品标签',
-  `keyword` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
+  `tags` varchar(100) NOT NULL DEFAULT '' COMMENT '产品标签',
+  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
   `hits` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击次数',
-  `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图1',
-  `thumb1` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图2',
-  `thumb2` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图3',
-  `userId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
+  `thumb1` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图1',
+  `thumb2` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图2',
+  `thumb3` varchar(255) NOT NULL DEFAULT '' COMMENT '标题图3',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
   `username` varchar(50) NOT NULL DEFAULT '' COMMENT '会员名',
-  `groupid` smallint(4) unsigned NOT NULL DEFAULT '0' COMMENT '会员组id',
+  `group_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '会员组id',
   `company` varchar(100) NOT NULL DEFAULT '' COMMENT '公司名',
-  `vip` smallint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'VIP级别',
-  `truename` varchar(30) NOT NULL DEFAULT '' COMMENT '姓名/联系人',
+  `vip` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'VIP级别',
+  `contact` varchar(50) NOT NULL DEFAULT '' COMMENT '联系人',
   `telephone` varchar(50) NOT NULL DEFAULT '' COMMENT '联系电话',
   `mobile` varchar(50) NOT NULL DEFAULT '' COMMENT '联系手机',
   `address` varchar(255) NOT NULL DEFAULT '' COMMENT '联系地址',
   `email` varchar(50) NOT NULL DEFAULT '' COMMENT '联系邮箱',
   `msn` varchar(50) NOT NULL DEFAULT '' COMMENT '联系msn',
-  `weChat` varchar(50) NOT NULL DEFAULT '' COMMENT '联系微信',
-  `qq` varchar(20) NOT NULL DEFAULT '' COMMENT '联系qq',
-  `ali` varchar(30) NOT NULL DEFAULT '' COMMENT '联系阿里旺旺',
-  `skype` varchar(30) NOT NULL DEFAULT '' COMMENT '联系skype',
-  `toTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '过期时间',
+  `wechat` varchar(50) NOT NULL DEFAULT '' COMMENT '联系微信',
+  `qq` varchar(50) NOT NULL DEFAULT '' COMMENT '联系qq',
+  `ali` varchar(50) NOT NULL DEFAULT '' COMMENT '联系阿里旺旺',
+  `skype` varchar(50) NOT NULL DEFAULT '' COMMENT '联系skype',
+  `to_time` datetime DEFAULT NULL COMMENT '过期时间',
   `editor` varchar(50) NOT NULL DEFAULT '' COMMENT '编辑人',
-  `editDate` datetime DEFAULT NULL COMMENT '编辑时间',
-  `addDate` datetime DEFAULT NULL COMMENT '添加时间',
-  `template` varchar(30) NOT NULL DEFAULT '0' COMMENT '模板',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态,默认0待审,1通过,2拒绝,3过期,4删除',
-  `linkUrl` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
+  `edit_date` datetime DEFAULT NULL COMMENT '编辑时间',
+  `add_date` datetime DEFAULT NULL COMMENT '添加时间',
+  `template` varchar(20) NOT NULL DEFAULT '0' COMMENT '模板',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态,默认0待审、1通过、2拒绝、3过期、4删除',
+  `link_url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
   PRIMARY KEY (`id`),
-  KEY `userid` (`userId`),
-  KEY `editdate` (`editDate`,`vip`),
-  KEY `catid` (`catId`),
-  KEY `areaid` (`areaId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应';
-
-
-
-# Dump of table ec_sell_data
-# ------------------------------------------------------------
+  KEY `user_id` (`user_id`),
+  KEY `edit_date` (`edit_date`,`vip`),
+  KEY `cat_id` (`cat_id`),
+  KEY `area_id` (`area_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ec_sell_data`;
 
@@ -3871,11 +3832,6 @@ CREATE TABLE `ec_sell_data` (
   `content` mediumtext NOT NULL COMMENT '供应内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应内容';
-
-
-
-# Dump of table ec_setting
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ec_setting`;
 

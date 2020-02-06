@@ -19,25 +19,25 @@ class Member extends Model
     protected $error = ''; //错误信息
 
     /**
-     * 用户登录方法
+     * 用户登录
      * @param $username
      * @param $password
-     * @param null $map
+     * @param array $map
      * @return array|bool|\PDOStatement|string|Model|null
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function login($username,$password,$map=null)
+    public function login($username,$password,$map=[])
     {
         $map[] = ['state','=',0];
 
         if (checkEmail($username)) {
-            $map[] = ['email','=',$username]; //邮箱登陆
+            $map[] = ['email','=',$username]; //邮箱
         } elseif (checkMobile($username)) {
-            $map[] = ['mobile','=',$username]; //手机号登陆
+            $map[] = ['mobile','=',$username]; //手机号
         } else {
-            $map[] = ['username','=',$username]; //用户名登陆
+            $map[] = ['username','=',$username]; //用户名
         }
 
         $member = $this->where($map)->find();
@@ -56,7 +56,7 @@ class Member extends Model
 
     /**
      * 检测用户是否已登录
-     * @return int
+     * @return bool|mixed
      */
     public function is_login()
     {
@@ -71,7 +71,7 @@ class Member extends Model
     /**
      * 设置登录session
      * @param $member
-     * @return mixed
+     * @return bool|mixed
      */
     public function auto_login($member)
     {
@@ -250,7 +250,7 @@ class Member extends Model
      */
     public function getMemberList($params,$limit=20)
     {
-        $fields = 'id,username,company,regTime,loginTime,loginTimes';
+        $fields = 'id,username,company,reg_time,login_time,login_times';
         $member = $this;
 
         if(empty($params)){

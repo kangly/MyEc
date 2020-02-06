@@ -23,10 +23,10 @@
             </div>
 
             <div class="form-group row">
-                <label for="areaCode" class="col-sm-2 col-form-label">区域代码</label>
+                <label for="area_code" class="col-sm-2 col-form-label">区域代码</label>
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" class="form-control" name="areaCode" id="areaCode" value="{$area.areaCode|default=''}">
+                        <input type="text" class="form-control" name="area_code" id="area_code" value="{$area.area_code|default=''}">
                     </div>
                 </div>
             </div>
@@ -65,12 +65,12 @@
             tip_error('地区名称必填！',3);
             return;
         }
-        var areaCode = _trim_assign($('#areaCode'));
-        if(areaCode==''){
+        var area_code = _trim_assign($('#area_code'));
+        if(area_code==''){
             tip_error('区域代码必填！',3);
             return;
         }
-        if(areaCode.length!=6){
+        if(area_code.length!=6){
             tip_error('区域代码为6位数字！',3);
             return;
         }

@@ -53,9 +53,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="realName" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 真实姓名</label>
+                <label for="real_name" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 真实姓名</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="realName" id="realName" value="{$member.realName|default=''}">
+                    <input type="text" class="form-control" name="real_name" id="real_name" value="{$member.real_name|default=''}">
                 </div>
             </div>
 
@@ -111,9 +111,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="weChat" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信</label>
+                <label for="wechat" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="weChat" id="weChat" value="{$member.weChat|default=''}">
+                    <input type="text" class="form-control" name="wechat" id="wechat" value="{$member.wechat|default=''}">
                 </div>
             </div>
 
@@ -343,7 +343,7 @@
             <div class="form-group row">
                 <label for="sell" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 销售的产品（服务）</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="sell" id="sell" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="sell" id="sell" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">多个产品或服务请用'|'号隔开</small>
             </div>
@@ -351,7 +351,7 @@
             <div class="form-group row">
                 <label for="buy" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 采购的产品（服务）</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="buy" id="buy" value="{$member.listOrder|default=''}">
+                    <input type="text" class="form-control" name="buy" id="buy" value="{$member.sort|default=''}">
                 </div>
                 <small class="col-form-label gray9">多个产品或服务请用'|'号隔开</small>
             </div>
@@ -367,12 +367,12 @@
                 <label class="col-sm-3"><span class="text-danger text-danger-hide">*</span> 会员资料是否完整</label>
                 <div class="col-sm-6">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="edittime" id="edittime_1" value="1" checked>
-                        <label class="form-check-label" for="edittime_1">是</label>
+                        <input class="form-check-input" type="radio" name="edit_time" id="edit_time_1" value="1" checked>
+                        <label class="form-check-label" for="edit_time_1">是</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="edittime" id="edittime_0" value="0">
-                        <label class="form-check-label" for="edittime_0">否</label>
+                        <input class="form-check-input" type="radio" name="edit_time" id="edit_time_0" value="0">
+                        <label class="form-check-label" for="edit_time_0">否</label>
                     </div>
                     <small class="gray9">如果选择是，系统将不再提示会员完善资料</small>
                 </div>
