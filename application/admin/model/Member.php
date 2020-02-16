@@ -58,7 +58,7 @@ class Member extends Model
      * 检测用户是否已登录
      * @return bool|mixed
      */
-    public function is_login()
+    public function isLogin()
     {
         $member = session('member_auth');
         if (empty($member)) {
@@ -73,10 +73,10 @@ class Member extends Model
      * @param $member
      * @return bool|mixed
      */
-    public function auto_login($member)
+    public function autoLogin($member)
     {
         session('member_auth', $member);
-        return $this->is_login();
+        return $this->isLogin();
     }
 
     /**
@@ -89,7 +89,7 @@ class Member extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function validate_user($uid,$name,$value)
+    public function validateUer($uid,$name,$value)
     {
         if(!$uid || !$name || !$value){
             $this->error = '参数异常！';
@@ -99,13 +99,13 @@ class Member extends Model
         switch ($name)
         {
             case 'username':
-                $this->validate_name($uid,$value);
+                $this->validateName($uid,$value);
                 break;
             case 'email':
-                $this->validate_email($uid,$value);
+                $this->validateEmail($uid,$value);
                 break;
             case 'mobile':
-                $this->validate_mobile($uid,$value);
+                $this->validateMobile($uid,$value);
                 break;
         }
 
@@ -121,7 +121,7 @@ class Member extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function validate_name($id,$value)
+    public function validateName($id,$value)
     {
         if(!$value){
             $this->error = '用户名必填！';
@@ -150,7 +150,7 @@ class Member extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function validate_email($id,$value)
+    public function validateEmail($id,$value)
     {
         if(!checkEmail($value)){
             $this->error = '邮箱格式错误！';
@@ -179,7 +179,7 @@ class Member extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function validate_mobile($id,$value)
+    public function validateMobile($id,$value)
     {
         if(!checkMobile($value)){
             $this->error = '电话格式错误！';
@@ -206,7 +206,7 @@ class Member extends Model
      * @param $confirm_password
      * @return bool
      */
-    public function validate_password($old_password,$new_password,$confirm_password)
+    public function validatePassword($old_password,$new_password,$confirm_password)
     {
         if(!$old_password)
         {
@@ -248,7 +248,7 @@ class Member extends Model
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getMemberList($params,$limit=20)
+    public function getMembers($params=[],$limit=20)
     {
         $fields = 'id,username,company,reg_time,login_time,login_times';
         $member = $this;
@@ -265,6 +265,14 @@ class Member extends Model
         }
 
         return $member->field($fields)->paginate($limit,false,['query'=>$params]);
+    }
+
+    public function getMember($id)
+    {
+        if($id>0){
+            return $this->where('id',$id)->find();
+        }
+        return null;
     }
 
     /**

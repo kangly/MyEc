@@ -6,5 +6,5 @@
  * @return mixed
  */
 function is_login(){
-    return model('admin/Member')->is_login();
+    return model('admin/Member')->isLogin();
 }

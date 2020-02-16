@@ -23,8 +23,8 @@
                     <td>{neq name='vo.login_time' value=''}{$vo.login_time|date='Y-m-d H:i'}{/neq}</td>
                     <td>{$vo.login_times}</td>
                     <td>
-                        <i class="fas fa-edit" style="cursor: pointer;" onclick="editMember('{$vo.id}')"></i>
-                        <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteMember('{$vo.id}')"></i>
+                        <i class="fas fa-edit cursor-pointer" onclick="editMember('{$vo.id}')"></i>
+                        <i class="fas fa-trash cursor-pointer" onclick="deleteMember('{$vo.id}')"></i>
                     </td>
                 </tr>
             {/volist}

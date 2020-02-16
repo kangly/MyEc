@@ -4,16 +4,28 @@
         <table class="table table-bordered table-striped table-sm table-hover text-center">
             <thead class="thead-light">
             <tr>
-                <th>会员名</th>
-                <th>公司</th>
+                <th>排序</th>
+                <th>ID</th>
                 <th>会员组</th>
-                <th>注册时间</th>
-                <th>登录时间</th>
-                <th>登录次数</th>
+                <th>类型</th>
+                <th>VIP指数</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
+            {volist name='group_list' id='vo'}
+            <tr>
+                <td>{$vo.sort}</td>
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td></td>
+                <td>{$vo.vip}</td>
+                <td>
+                    <i class="fas fa-edit cursor-pointer" onclick="editGroup('{$vo.id}')"></i>
+                    <i class="fas fa-trash cursor-pointer" onclick="deleteGroup('{$vo.id}')"></i>
+                </td>
+            </tr>
+            {/volist}
             </tbody>
         </table>
     </div>
@@ -29,6 +41,29 @@
         var url = "{:url('/admin/member/editGroup?id="+id+"','',false)}";
         _add_movable_popup('edit_group',title,url,'','',function(){
             groupList();
+        });
+    }
+
+    function deleteGroup(id){
+        _systemConfirm('确定删除该会员组吗？',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "post",
+                    url: "{:url('/admin/member/deleteGroup')}",
+                    data: {id:id},
+                    success: function(res){
+                        if(res>0){
+                            groupList();
+                            tip_success('删除成功！');
+                        }else{
+                            tip_error('删除失败！',3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
         });
     }
 </script>

@@ -6,6 +6,8 @@
  * Time: 10:29
  */
 
+namespace app\admin\model;
+
 use think\Model;
 
 class AuthGroup extends Model

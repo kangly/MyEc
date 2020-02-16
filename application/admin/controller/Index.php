@@ -63,7 +63,7 @@ class Index extends Admin
             $new_password = input('post.new_password',null,'trim');
             $confirm_password = input('post.confirm_password',null,'trim');
             $member = model('admin/Member');
-            $result = $member->validate_password($old_password,$new_password,$confirm_password);
+            $result = $member->validatePassword($old_password,$new_password,$confirm_password);
             if($result)
             {
                 $member_data = $member->field('password')->where('id',$this->userInfo['id'])->find();

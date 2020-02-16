@@ -17,11 +17,9 @@ class Member extends Admin
         return $this->fetch();
     }
 
-    //Db静态调用
     public function memberList()
     {
-        $fields = 'id,username,company,reg_time,login_time,login_times';
-        $member_list = Db::name('member')->field($fields)->where('state',0)->paginate(20);
+        $member_list = model('member')->getMembers();
         $this->assign('member_list',$member_list);
 
         return $this->fetch();
@@ -32,10 +30,7 @@ class Member extends Admin
         if(request()->isGet())
         {
             $id = input('get.id');
-            $member = null;
-            if($id>0){
-                $member = Db::name('member')->where('id',$id)->find();
-            }
+            $member = model('member')->getMember($id);
             $this->assign('member',$member);
         }
 
@@ -169,6 +164,9 @@ class Member extends Admin
 
     public function groupList()
     {
+        $group_list = Db::name('member_group')->select();
+        $this->assign('group_list',$group_list);
+
         return $this->fetch();
     }
 
@@ -178,6 +176,11 @@ class Member extends Admin
     }
 
     public function saveGroup()
+    {
+
+    }
+
+    public function deleteGroup()
     {
 
     }

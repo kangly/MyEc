@@ -62,7 +62,7 @@ class Login extends Controller
             ];
             $member->where('id','=',$member_data['id'])->update($save_data);
 
-            $member->auto_login(array_merge($member_data,$save_data));
+            $member->autoLogin(array_merge($member_data,$save_data));
 
             $this->success('登录成功，正在跳转...',$url);
         }
