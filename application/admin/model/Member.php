@@ -267,12 +267,28 @@ class Member extends Model
         return $member->field($fields)->paginate($limit,false,['query'=>$params]);
     }
 
-    public function getMember($id)
+    /**
+     * @param $id
+     * @return array|\PDOStatement|string|Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMember($id=0)
     {
         if($id>0){
             return $this->where('id',$id)->find();
         }
         return null;
+    }
+
+    /**
+     * @param int $id
+     * @param $data
+     */
+    public function saveMember($id=0,$data)
+    {
+
     }
 
     /**
