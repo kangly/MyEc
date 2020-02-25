@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 use think\Db;
+use think\Request;
 
 class Member extends Admin
 {
@@ -25,19 +26,18 @@ class Member extends Admin
         return $this->fetch();
     }
 
-    public function editMember()
+    public function editMember(Request $request)
     {
         if(request()->isGet())
         {
-            $id = input('get.id');
-            $member = model('member')->getMember($id);
+            $member = model('member')->getMember($request->param('id'));
             $this->assign('member',$member);
         }
 
         return $this->fetch();
     }
 
-    public function saveMember()
+    public function saveMember(Request $request)
     {
         if(request()->isPost())
         {

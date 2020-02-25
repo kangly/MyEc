@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="card">
+    <div class="table-responsive">
+        <button type="button" class="btn btn-success btn-sm m-b-10" onclick="editAdmin(0)">添加管理员</button>
+        <table class="table table-bordered table-striped table-sm table-hover text-center">
+            <thead class="thead-light">
+            <tr>
+                <th>会员名</th>
+                <th>公司</th>
+                <th>会员组</th>
+                <th>注册时间</th>
+                <th>登录时间</th>
+                <th>登录次数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='admin_list' id='vo'}
+            <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.company}</td>
+                <td></td>
+                <td>{neq name='vo.reg_time' value=''}{$vo.reg_time|date='Y-m-d H:i'}{/neq}</td>
+                <td>{neq name='vo.login_time' value=''}{$vo.login_time|date='Y-m-d H:i'}{/neq}</td>
+                <td>{$vo.login_times}</td>
+                <td>
+                    <i class="fas fa-edit cursor-pointer" onclick="editAdmin('{$vo.id}')"></i>
+                    <i class="fas fa-trash cursor-pointer" onclick="deleteAdmin('{$vo.id}')"></i>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$admin_list|raw}
+    </div>
+</div>
 
-</body>
-</html>
+<script type="text/javascript">
+    function adminList(){
+        _p_a_load("{:url('/admin/system/adminList')}",'tab1');
+    }
+
+    function editAdmin(id){
+        var title = id>0?'编辑管理员':'添加管理员';
+        var url = "{:url('/admin/system/editAdmin?id="+id+"','',false)}";
+        _add_movable_popup('edit_admin',title,url,'','',function(){
+            adminList();
+        });
+    }
+
+    function deleteAdmin(id){
+        _systemConfirm('确定删除该管理员吗？',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "post",
+                    url: "{:url('/admin/system/deleteAdmin')}",
+                    data: {id:id},
+                    success: function(res){
+                        if(res>0){
+                            adminList();
+                            tip_success('删除成功！');
+                        }else{
+                            tip_error('删除失败！',3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
+        });
+    }
+</script>

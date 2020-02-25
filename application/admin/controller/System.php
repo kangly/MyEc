@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 use think\Db;
+use think\Request;
 
 /**
  * Class System
@@ -109,12 +110,17 @@ class System extends Admin
 
     /**
      * 地区管理列表
+     * @param Request $request
+     * @return mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
-    public function areaList()
+    public function areaList(Request $request)
     {
-        $pid = input('post.pid',0);
+        $pid = $request->param('pid',0);
         $where = [['pid','=',$pid]];
-        $keyword = input('post.keyword','','trim');
+        $keyword = $request->param('keyword','','trim');
         if($keyword){
             $where[] = array('name','like',sprintf('%%%s%%',$keyword));
         }
@@ -136,19 +142,26 @@ class System extends Admin
         return $this->fetch();
     }
 
-    public function editArea()
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function editArea(Request $request)
     {
         if(request()->isGet())
         {
             $area = null;
-            $id = input('get.id');
+            $id = $request->param('id');
             if($id>0){
                 $area = Db::name('area')->where('id','=',$id)->find();
             }
             $this->assign('area',$area);
             $area_code1 = '';
             $area_code2 = '';
-            $pid = input('get.pid');
+            $pid = $request->param('pid');
             if($pid>0){
                 $aArea = Db::name('area')->field('pid,namespace,area_code')->where('id','=',$pid)->find();
                 if($aArea['namespace']=='province'){
@@ -166,12 +179,21 @@ class System extends Admin
         return $this->fetch();
     }
 
-    public function saveArea()
+    /**
+     * @param Request $request
+     * @return mixed|string
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws \think\exception\PDOException
+     */
+    public function saveArea(Request $request)
     {
         if(request()->isPost())
         {
-            $name = input('post.name','','trim');
-            $areaCode = input('post.area_code','','trim');
+            $name = $request->param('name','','trim');
+            $areaCode = $request->param('area_code','','trim');
 
             if(!$name){
                 return '地区名称必填！';
@@ -183,10 +205,10 @@ class System extends Admin
                 return '区域代码为6位数字！';
             }
 
-            $area_id = input('post.area_id');
-            $province_id = input('post.province_id');
-            $city_id = input('post.city_id');
-            $sort = input('post.sort','','trim');
+            $area_id = $request->param('area_id');
+            $province_id = $request->param('province_id');
+            $city_id = $request->param('city_id');
+            $sort = $request->param('sort','','trim');
 
             $data = [
                 'name'=>$name,
@@ -230,11 +252,14 @@ class System extends Admin
         echo $this->fetch();
     }
 
-    public function deleteArea()
+    /**
+     * @param Request $request
+     */
+    public function deleteArea(Request $request)
     {
         if(request()->isPost())
         {
-            $id = input('post.id');
+            $id = $request->param('id');
             if($id>0)
             {
                 // 启动事务
@@ -284,6 +309,24 @@ class System extends Admin
 
     public function adminList()
     {
+        $admin_list = model('member')->getMembers();
+        $this->assign('admin_list',$admin_list);
+
         return $this->fetch();
+    }
+
+    public function editAdmin(Request $request)
+    {
+        return $this->fetch();
+    }
+
+    public function saveAdmin(Request $request)
+    {
+
+    }
+
+    public function deleteAdmin(Request $request)
+    {
+
     }
 }

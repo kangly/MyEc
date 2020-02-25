@@ -11,6 +11,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\facade\Config;
 use think\facade\Session;
+use think\Request;
 
 /**
  * Class Login
@@ -18,8 +19,10 @@ use think\facade\Session;
  */
 class Login extends Controller
 {
+    //protected $middleware = ['AdminLogin'];
+
     /**
-     * 登录
+     * 登录首页
      * @return mixed
      */
     public function index()
@@ -33,10 +36,11 @@ class Login extends Controller
 
     /**
      * 登录验证
+     * @param Request $request
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public function login()
+    public function login(Request $request)
     {
         $url = url('/admin/index');
         if(is_login()){
@@ -45,9 +49,9 @@ class Login extends Controller
 
         if(request()->isPost())
         {
-            $username = input('post.username');
-            $password = input('post.password');
-            $member = model('admin/Member');
+            $username = $request->param('username');
+            $password = $request->param('password');
+            $member = model('member');
             $member_data = $member->login($username,$password);
             if(!$member_data){
                 $this->error($member->getError());
