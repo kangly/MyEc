@@ -4,13 +4,16 @@
             <div class="form-group row">
                 <label for="seo_delimiter" class="col-sm-2 text-left control-label col-form-label">标题分隔符</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="seo_delimiter" id="seo_delimiter" placeholder="标题分隔符">
+                    <input type="text" class="form-control" name="seo_delimiter" id="seo_delimiter" value="_" placeholder="标题分隔符">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="seo_title" class="col-sm-2 text-left control-label col-form-label">Title(网站标题)</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="seo_title" id="seo_title" placeholder="Title(网站标题)">
+                    <input type="text" class="form-control" name="seo_title" id="seo_title" value="" placeholder="Title(网站标题)">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="针对搜索引擎设置的网页标题" onclick="_systemTips(this)"></i>
                 </div>
             </div>
             <div class="form-group row">
@@ -18,11 +21,17 @@
                 <div class="col-sm-6">
                     <textarea class="form-control" name="seo_keywords" id="seo_keywords" placeholder="Meta Keywords (网页关键词)"></textarea>
                 </div>
+                <div class="m-t-20">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="针对搜索引擎设置的关键词" onclick="_systemTips(this)"></i>
+                </div>
             </div>
             <div class="form-group row">
                 <label for="seo_description" class="col-sm-2 text-left control-label col-form-label">Meta Description<br>(网页描述)</label>
                 <div class="col-sm-6">
                     <textarea class="form-control" name="seo_description" id="seo_description" placeholder="Meta Description (网页描述)"></textarea>
+                </div>
+                <div class="m-t-20">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="针对搜索引擎设置的网页描述" onclick="_systemTips(this)"></i>
                 </div>
             </div>
             <div class="form-group row">
@@ -32,7 +41,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="language" class="col-sm-2 col-form-label">生成文件扩展名</label>
+                <label for="file_ext" class="col-sm-2 col-form-label">生成文件扩展名</label>
                 <div class="col-sm-2">
                     <select class="form-control" name="file_ext" id="file_ext">
                         <option value="html" selected>.html</option>
@@ -76,6 +85,105 @@
                 </div>
                 <div class="m-t-7">
                     <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="如果填写 .destoon.com 同时需要将域名泛解析 *.destoon.com 指向服务器IP，并且在服务器端绑定泛域名至 网站根目录 或者 网站根目录/company 目录，生成的主页形式为username.destoon.com<br/>如果填写 i.destoon.com 同时需要将域名泛解析 i.destoon.com 指向服务器IP，并且在服务器端绑定域名至网站根目录/company 目录，生成的主页形式为i.destoon.com/username/(注：此方式必须支持伪静态)" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="com_dir" class="col-sm-2 col-form-label">泛解析绑定目录</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="com_dir" id="com_dir">
+                        <option value="0">根目录</option>
+                        <option value="1" selected>company目录</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">公司二级域名加www	</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_www" id="com_www_0" value="0" checked>
+                        <label class="form-check-label" for="com_www_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_www" id="com_www_1" value="1">
+                        <label class="form-check-label" for="com_www_1">关闭</label>
+                    </div>
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="例如二级域名为sell.destoon.com<br>添加www后为 www.sell.destoon.com" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">公司二级域名https</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_https" id="com_https_0" value="0" checked>
+                        <label class="form-check-label" for="com_https_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_https" id="com_https_1" value="1">
+                        <label class="form-check-label" for="com_https_1">关闭</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">会员顶级域名伪静态</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_rewrite" id="com_rewrite_0" value="0" checked>
+                        <label class="form-check-label" for="com_rewrite_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="com_rewrite" id="com_rewrite_1" value="1">
+                        <label class="form-check-label" for="com_rewrite_1">关闭</label>
+                    </div>
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="部分服务器可能无法开启会员绑定的顶级域名伪静态，如果无法开启，可在此关闭，以免出现打不开页面的情况，此项仅针对会员顶级域名，不影响其他页面伪静态" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">搜索页伪静态</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="search_rewrite" id="search_rewrite_0" value="0" checked>
+                        <label class="form-check-label" for="search_rewrite_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="search_rewrite" id="search_rewrite_1" value="1">
+                        <label class="form-check-label" for="search_rewrite_1">关闭</label>
+                    </div>
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="搜索结果地址伪静态，此项会增加服务器负载" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">服务器中文路径编码</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pcharset" id="pcharset_0" value="0" checked>
+                        <label class="form-check-label" for="pcharset_0">未用</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pcharset" id="pcharset_1" value="gbk">
+                        <label class="form-check-label" for="pcharset_1">GBK</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pcharset" id="pcharset_2" value="utf-8">
+                        <label class="form-check-label" for="pcharset_1">UTF-8</label>
+                    </div>
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="当生成包含中文文件名的文件出现乱码或者下载带有中文名文件提示找不到文件时，可尝试设置此项" onclick="_systemTips(this)"></i>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">404错误日志</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="log_404" id="log_404_0" value="0" checked>
+                        <label class="form-check-label" for="log_404_0">开启</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="log_404" id="log_404_1" value="1">
+                        <label class="form-check-label" for="log_404_1">关闭</label>
+                    </div>
+                    <a href="#" class="btn-link">[查看日志]</a>
+                    &nbsp;
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="开启404日志有利于分析站内死链接和用户或搜索引擎蜘蛛的错误记录
+同时需要设置站点的404页面至网站根目录404.php" onclick="_systemTips(this)"></i>
                 </div>
             </div>
         </div>
