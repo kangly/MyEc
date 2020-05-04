@@ -33,12 +33,12 @@ class Sell extends Admin
 
     public function saveSell()
     {
-
+        echo 'success';
     }
 
     public function deleteSell()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -53,12 +53,12 @@ class Sell extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 
     public function setting()
@@ -68,6 +68,6 @@ class Sell extends Admin
 
     public function saveSetting()
     {
-
+        echo 'success';
     }
 }

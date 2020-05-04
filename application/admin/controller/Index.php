@@ -59,6 +59,8 @@ class Index extends Admin
      */
     public function saveChangePassword(Request $request)
     {
+        forbid();
+
         if(request()->isPost())
         {
             $old_password = $request->param('old_password',null,'trim');

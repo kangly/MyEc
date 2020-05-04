@@ -27,12 +27,12 @@ class Exhibit extends Admin
 
     public function saveExhibit()
     {
-
+        echo 'success';
     }
 
     public function deleteExhibit()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Exhibit extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

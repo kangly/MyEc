@@ -27,12 +27,12 @@ class News extends Admin
 
     public function saveNews()
     {
-
+        echo 'success';
     }
 
     public function deleteNews()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class News extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

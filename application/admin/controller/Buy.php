@@ -27,12 +27,12 @@ class Buy extends Admin
 
     public function saveBuy()
     {
-
+        echo 'success';
     }
 
     public function deleteBuy()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Buy extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+use think\facade\Config;
 
 /**
  * 返回当前时间
@@ -104,4 +105,12 @@ function list2tree($list, $pk = 'id', $pid = 'parent_id', $child = '_child', $ro
         }
     }
     return $tree;
+}
+
+function forbid(){
+    $is_online = Config::get('app.is_online');
+    if($is_online==1){
+        echo '禁止操作！';
+        exit;
+    }
 }

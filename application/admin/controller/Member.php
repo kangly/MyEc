@@ -39,6 +39,8 @@ class Member extends Admin
 
     public function saveMember(Request $request)
     {
+        forbid();
+
         if(request()->isPost())
         {
             $member_id = input('post.member_id');
@@ -177,11 +179,11 @@ class Member extends Admin
 
     public function saveGroup()
     {
-
+        echo 'success';
     }
 
     public function deleteGroup()
     {
-
+        echo 'success';
     }
 }

@@ -27,7 +27,7 @@ class Company extends Admin
 
     public function saveCompany()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -42,11 +42,11 @@ class Company extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-        return $this->fetch();
+        echo 'success';
     }
 }

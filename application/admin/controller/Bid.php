@@ -27,12 +27,12 @@ class Bid extends Admin
 
     public function saveBid()
     {
-
+        echo 'success';
     }
 
     public function deleteBid()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Bid extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

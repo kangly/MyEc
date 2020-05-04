@@ -154,4 +154,5 @@ return [
     'EC_RELEASE'             => '20190801',
     'EC_CHARSET'             => 'UTF-8',
     'EC_LANG'                => 'ZH-CN',
+    'IS_ONLINE'              => '0',
 ];

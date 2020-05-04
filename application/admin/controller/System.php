@@ -65,6 +65,8 @@ class System extends Admin
 
     public function cacheArea()
     {
+        forbid();
+
         if(request()->isGet())
         {
             $province_list = Db::name('area')
@@ -190,6 +192,8 @@ class System extends Admin
      */
     public function saveArea(Request $request)
     {
+        forbid();
+
         if(request()->isPost())
         {
             $name = $request->param('name','','trim');
@@ -257,6 +261,8 @@ class System extends Admin
      */
     public function deleteArea(Request $request)
     {
+        forbid();
+
         if(request()->isPost())
         {
             $id = $request->param('id');
@@ -322,11 +328,11 @@ class System extends Admin
 
     public function saveAdmin(Request $request)
     {
-
+        echo 'success';
     }
 
     public function deleteAdmin(Request $request)
     {
-
+        echo 'success';
     }
 }

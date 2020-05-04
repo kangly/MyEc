@@ -27,12 +27,12 @@ class Quote extends Admin
 
     public function saveQuote()
     {
-
+        echo 'success';
     }
 
     public function deleteQuote()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Quote extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

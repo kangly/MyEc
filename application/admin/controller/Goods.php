@@ -27,12 +27,12 @@ class Goods extends Admin
 
     public function saveGoods()
     {
-
+        echo 'success';
     }
 
     public function deleteGoods()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Goods extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }

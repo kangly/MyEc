@@ -27,12 +27,12 @@ class Asset extends Admin
 
     public function saveAsset()
     {
-
+        echo 'success';
     }
 
     public function deleteAsset()
     {
-
+        echo 'success';
     }
 
     public function category()
@@ -47,11 +47,11 @@ class Asset extends Admin
 
     public function saveCategory()
     {
-
+        echo 'success';
     }
 
     public function deleteCategory()
     {
-
+        echo 'success';
     }
 }
