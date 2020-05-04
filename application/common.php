@@ -108,7 +108,7 @@ function list2tree($list, $pk = 'id', $pid = 'parent_id', $child = '_child', $ro
 }
 
 function forbid(){
-    $is_online = Config::get('app.is_online');
+    $is_online = Config::get('IS_ONLINE');
     if($is_online==1){
         echo '禁止操作！';
         exit;
