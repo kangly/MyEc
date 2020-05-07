@@ -10,6 +10,8 @@ namespace app\admin\controller;
 
 use think\Db;
 use think\Request;
+use think\facade\Config;
+use think\facade\Session;
 
 /**
  * Class Index
@@ -75,13 +77,11 @@ class Index extends Admin
                 $member_data = $member->field('password')->where($map)->find();
                 if($member_data['password']!=md5($old_password)){
                     echo '旧密码错误！';
-                    exit;
+                }else{
+                    $member->where($map)->update(['password'=>md5($new_password)]);
+                    $this->clearCache();//修改密码后需清空缓存重新登录
+                    echo $this->userInfo['id'];
                 }
-                $member->where($map)->update(['password'=>md5($new_password)]);
-
-                controller('login')->clearCache();//修改密码后需清空缓存重新登录
-
-                echo $this->userInfo['id'];
             }
             else
             {
@@ -91,6 +91,26 @@ class Index extends Admin
         else
         {
             echo '非法操作！';
+        }
+    }
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+        $this->clearCache();
+
+        return 'success';
+    }
+
+    /**
+     * 清空登录session
+     */
+    public function clearCache()
+    {
+        if(is_login()){
+            Session::clear(Config::get('session.prefix'));
         }
     }
 }

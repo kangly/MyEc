@@ -13,12 +13,31 @@
     <title>管理员登录 - Powered By EC B2B</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.min.css">
     <script type="text/javascript" src="/static/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/bootstrap/js/bootstrap.min.js"></script>
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="/static/js/html5shiv.js"></script>
-    <script type="text/javascript" src="/static/js/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript">$('[data-toggle="tooltip"]').tooltip();</script>
+    <script type="text/javascript" src="/static/js/layer/layer.js"></script>
+    <script type="text/javascript">
+        function go_login(){
+            var username = $.trim($('#username').val());
+            if(username==''){
+                layer.msg('用户名不能为空！',{icon:"5",time:2000});
+                return false;
+            }
+            var password = $.trim($('#password').val());
+            if(password==''){
+                layer.msg('密码不能为空！',{icon:"5",time:2000});
+                return false;
+            }
+            $.post("{:url('/admin/login/login')}", {'username':username,'password':password}, function(data) {
+                if(data=='success'){
+                    layer.msg('登陆成功！即将跳转...',{icon:"6",time:1000});
+                    setTimeout(function(){
+                        location.href = "{:url('/admin/index')}";
+                    },1000);
+                }else{
+                    layer.msg(data,{icon:"5",time:2000});
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="main-wrapper">
@@ -35,13 +54,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                 </div>
-                                <input name="username" type="text" class="form-control form-control-lg" placeholder="用户名" required="">
+                                <input name="username" id="username" type="text" class="form-control form-control-lg" placeholder="用户名">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                 </div>
-                                <input name="password" type="password" class="form-control form-control-lg" placeholder="密码" required="">
+                                <input name="password" id="password" type="password" class="form-control form-control-lg" placeholder="密码">
                             </div>
                         </div>
                     </div>
@@ -49,8 +68,8 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <div class="p-t-20">
-                                    <button class="btn btn-info float-left" type="button" onclick="location.href='/'">取消</button>
-                                    <button class="btn btn-success float-right" type="submit">登录</button>
+                                    <button class="btn btn-info float-left" type="button" onclick="location.href='/'">返回前台</button>
+                                    <button class="btn btn-success float-right" type="button" onclick="go_login()">登录</button>
                                 </div>
                             </div>
                         </div>

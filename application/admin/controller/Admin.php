@@ -16,15 +16,13 @@ use think\Controller;
  */
 class Admin extends Controller
 {
-    public $userInfo = [];//当前登录用户信息
+    protected $middleware = ['AdminLogin'];// 后台判断是否登录的中间件
+    protected $userInfo = [];//当前登录的用户信息
 
-    //初始化数据
-    public function initialize()
+    protected function initialize()
     {
+        parent::initialize();
+
         $this->userInfo = is_login();
-        if(!$this->userInfo){
-            $this->redirect(url('/admin/login'));
-        }
-        $this->assign('userInfo',$this->userInfo);
     }
 }

@@ -9,8 +9,6 @@
 namespace app\admin\controller;
 
 use think\Controller;
-use think\facade\Config;
-use think\facade\Session;
 use think\Request;
 
 /**
@@ -19,8 +17,6 @@ use think\Request;
  */
 class Login extends Controller
 {
-    //protected $middleware = ['AdminLogin'];
-
     /**
      * 登录首页
      * @return mixed
@@ -37,14 +33,14 @@ class Login extends Controller
     /**
      * 登录验证
      * @param Request $request
+     * @return mixed|string
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
     public function login(Request $request)
     {
-        $url = url('/admin/index');
         if(is_login()){
-            $this->error('请勿重复登录！',$url);
+            return '请勿重复登录！';
         }
 
         if(request()->isPost())
@@ -54,7 +50,7 @@ class Login extends Controller
             $member = model('member');
             $member_data = $member->login($username,$password);
             if(!$member_data){
-                $this->error($member->getError());
+                return $member->getError();
             }else{
                 $member_data = $member_data->toArray();
             }
@@ -68,30 +64,11 @@ class Login extends Controller
 
             $member->autoLogin(array_merge($member_data,$save_data));
 
-            $this->success('登录成功，正在跳转...',$url);
+            return 'success';
         }
         else
         {
-            $this->error('非法操作！');
-        }
-    }
-
-    /**
-     * 退出登录
-     */
-    public function logout()
-    {
-        $this->clearCache();
-        $this->redirect(url('/admin/login'));
-    }
-
-    /**
-     * 清空登录session
-     */
-    public function clearCache()
-    {
-        if(is_login()){
-            Session::clear(Config::get('session.prefix'));
+            return '非法操作！';
         }
     }
 }
