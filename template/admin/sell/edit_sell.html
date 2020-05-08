@@ -14,12 +14,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 标题</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" name="title" id="title" placeholder="标题">
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="level" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 级别</label>
                 <div class="col-sm-4">
@@ -43,6 +45,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="cat_id" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 行业分类</label>
                 <div class="col-sm-4">
@@ -55,12 +58,14 @@
                     <a href="javascript:void(0);" onclick="" class="btn-link">搜索分类</a>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="brand" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品品牌</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="brand" id="brand" placeholder="产品品牌">
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="content" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 详细说明</label>
                 <div class="col-sm-10">
@@ -70,6 +75,7 @@
                     </script>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="thumb" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品图片</label>
                 <div class="col-sm-4">
@@ -91,6 +97,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="to_time" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 过期时间</label>
                 <div class="col-sm-2">
@@ -110,6 +117,7 @@
                     <small>不选表示长期有效</small>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="n1" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 主要参数</label>
                 <div class="col-sm-6">
@@ -139,6 +147,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="unit" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 交易条件</label>
                 <div class="col-sm-6">
@@ -166,6 +175,171 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span class="text-danger">*</span> 会员信息</label>
+                <div class="col-sm-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_member" id="is_member_0" value="0" checked>
+                        <label class="form-check-label" for="is_member_0">是</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_member" id="is_member_1" value="1">
+                        <label class="form-check-label" for="is_member_1">否</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="is_member_div_0" class="hide">
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 公司名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="company" id="company" placeholder="公司名称">
+                    </div>
+                    <div class="m-t-7">个人请填姓名 例如：张三</div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 所在地址</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="area_id" id="area_id">
+                            <option value="0" selected>请选择</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 联系人</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="true_name" id="true_name" placeholder="联系人">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 联系手机</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="联系手机">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 电子邮件</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="电子邮件">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 联系电话</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="telephone" id="telephone" placeholder="联系电话">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 联系地址</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="address" id="address" placeholder="联系地址">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> QQ</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="wx" id="wx" placeholder="微信">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 阿里旺旺</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="ali" id="ali" placeholder="阿里旺旺">
+                    </div>
+                </div>
+            </div>
+
+            <div id="is_member_div_1" class="show">
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 会员名</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="会员名">
+                    </div>
+                    <div class="m-t-7">
+                        <a href="javascript:void(0);" onclick="" class="btn-link">[资料]</a>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 会员推荐产品</label>
+                    <div class="col-sm-4">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="elite" id="elite_1" value="1">
+                            <label class="form-check-label" for="elite_1">是</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="elite" id="elite_0" value="0" checked>
+                            <label class="form-check-label" for="elite_0">否</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 信息状态</label>
+                <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status" id="status_3" value="3" checked>
+                        <label class="form-check-label" for="status_3">通过</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status" id="status_2" value="2">
+                        <label class="form-check-label" for="status_2">待审</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status" id="status_1" value="1">
+                        <label class="form-check-label" for="status_1">拒绝</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status" id="status_4" value="4">
+                        <label class="form-check-label" for="status_4">过期</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status" id="status_0" value="0">
+                        <label class="form-check-label" for="status_0">删除</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="to_time" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 添加时间</label>
+                <div class="col-sm-2">
+                    <input type="text" id="add_time" name="add_time" readonly value="">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 浏览次数</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="hits" id="hits" placeholder="浏览次数">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 内容收费</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="fee" id="fee" placeholder="内容收费">
+                </div>
+                <div class="m-t-7">
+                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="不填或填0表示继承模块设置价格，-1表示不收费 大于0的数字表示具体收费价格" onclick="_systemTips(this)"></i>
                 </div>
             </div>
         </div>
@@ -197,11 +371,27 @@
             autoclose: true,//自动关闭
             format: "yyyy-mm-dd hh:ii:ss"//日期显示格式
         });
+
+        $('#add_time').datetimepicker({
+            language: "zh-CN",//配置中文
+            autoclose: true,//自动关闭
+            format: "yyyy-mm-dd hh:ii:ss"//日期显示格式
+        });
+
+        $('input[name="is_member"]').click(function(){
+            if($(this).val()==1){
+                $('#is_member_div_0').show();
+                $('#is_member_div_1').hide();
+            }else{
+                $('#is_member_div_0').hide();
+                $('#is_member_div_1').show();
+            }
+        });
     });
 
     function save(callback){
         //alert($('#title_color').val());
-        alert(UE.getContent());
+        //alert(UE.getContent());
         submitTheForm('admin-edit-sell-form',function(data){
             if(data>0){
                 if(callback){
