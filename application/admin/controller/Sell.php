@@ -43,6 +43,10 @@ class Sell extends Admin
 
     public function category()
     {
+        $fields = 'id,cat_id,type_id,title,thumb1,price,user_id,username,hits,left(add_date,16) add_date';
+        $sell = Db::name('sell')->field($fields)->where('status',1)->paginate(20);
+        $this->assign('sell',$sell);
+
         return $this->fetch();
     }
 

@@ -3833,6 +3833,19 @@ CREATE TABLE `ec_sell_data` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应内容';
 
+DROP TABLE IF EXISTS `ec_sell_category`;
+
+CREATE TABLE `ec_sell_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0',
+  `arrparentid` varchar(255) NOT NULL DEFAULT '',
+  `child` tinyint(1) NOT NULL DEFAULT '0',
+  `arrchildid` text NOT NULL,
+  `listorder` smallint(4) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应行业分类';
+
 DROP TABLE IF EXISTS `ec_setting`;
 
 CREATE TABLE `ec_setting` (

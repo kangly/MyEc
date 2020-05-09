@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="card">
+    <div class="table-responsive">
+        <div class="mb-2">
+            <button type="button" class="btn btn-success btn-sm" onclick="editSell(0)">添加分类</button>
+        </div>
+        <table class="table table-bordered table-striped table-sm table-hover text-center">
+            <thead class="thead-light">
+            <tr>
+                <th>标题</th>
+                <th>行业</th>
+                <th>类型</th>
+                <th>缩略图</th>
+                <th>价格</th>
+                <th>会员</th>
+                <th>添加时间</th>
+                <th>浏览</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='sell' id='vo'}
+            <tr>
+                <td>{$vo.title}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{$vo.price}</td>
+                <td>{$vo.username}</td>
+                <td>{$vo.add_date}</td>
+                <td>{$vo.hits}</td>
+                <td>
+                    <i class="fas fa-edit cursor-pointer" onclick="editSell('{$vo.id}')"></i>
+                    <i class="fas fa-trash cursor-pointer" onclick="deleteSell('{$vo.id}')"></i>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$sell|raw}
+    </div>
+</div>
 
-</body>
-</html>
+<script type="text/javascript">
+    function sellList(){
+        _p_a_load("{:url('/admin/sell/sellList')}",'tab1');
+    }
+
+    function editSell(id){
+        var title = id>0?'编辑供应':'添加供应';
+        var url = '/admin/sell/editSell?id='+id;
+        _add_movable_popup('edit_sell',title,url,'','',function(){
+            sellList();
+        });
+    }
+
+    function deleteSell(id){
+        _systemConfirm('确定删除该供应信息吗？',function(){
+            if(op_start()){
+                $.ajax({
+                    dataType:"text",
+                    type: "post",
+                    url: "{:url('/admin/sell/deleteSell')}",
+                    data: {id:id},
+                    success: function(res){
+                        if(res>0){
+                            sellList();
+                            tip_success('删除成功！');
+                        }else{
+                            tip_error('删除失败！',3);
+                        }
+                    }
+                }).always(function(){
+                    op_end();
+                });
+            }
+        });
+    }
+</script>
