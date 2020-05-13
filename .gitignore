@@ -4,4 +4,4 @@
 *.log
 .env
 .DS_Store
-vendor
+/vendor

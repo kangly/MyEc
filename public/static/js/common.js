@@ -810,9 +810,10 @@ layer.config({
  * @param area ['宽','高']
  * @param offset 坐标,默认auto,即垂直水平居中
  * @param callback 保存成功后的回调方法
+ * @param max_min 是否显示最大/最小化按钮 true/false
  * @private
  */
-function _add_movable_popup(mark,title,url,area,offset,callback){
+function _add_movable_popup(mark,title,url,area,offset,callback,max_min){
     _show_top_loading();
     if(mark && $('.layui-layer.layui-layer-page[identity="'+mark+'"]').length>0){
         //layer.close($('.layui-layer.layui-layer-page').attr('times'));
@@ -820,14 +821,15 @@ function _add_movable_popup(mark,title,url,area,offset,callback){
     }
     $.get(url,{},function(str){
         if(str){
-            layer.open({
+            var layer_index = layer.open({
                 type: 1,
                 title: title,
-                area: area?area:['900px','600px'],
+                area: area?area:['1000px','600px'],
                 shade: 0,
                 offset: offset?offset:'auto',
                 content: str,
                 btn: ['确定','关闭'],
+                maxmin: max_min===false?false:true,
                 success: function(layero, index){
                     //弹层成功后的回调方法
                     $(layero).attr('identity',mark);

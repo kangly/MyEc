@@ -1,0 +1,35 @@
+<div class="card m-t-10">
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" id="admin-upload-image-form" action="{:url('/admin/common/saveImage')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <input id="file_upload" class="form-control" type="file" name="files[]" />
+            </div>
+        </div>
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="id" value="0">
+    </form>
+</div>
+
+<script type="text/javascript">
+    // $(function () {
+    //     $('#file_upload').fileupload({
+    //         url: "{:url('/admin/common/saveImage')}",
+    //         dataType: 'json',
+    //         done: function (e, data) {
+    //             $.each(data.result.files, function (index, file) {
+    //                 $('<p/>').text(file.name).appendTo(document.body);
+    //             });
+    //         }
+    //     });
+    // });
+
+    function save(callback){
+        submitTheForm('admin-upload-image-form',function(data){
+            if(data>0){
+                if(callback){
+                    callback();
+                }
+            }
+        });
+    }
+</script>
