@@ -1,69 +1,57 @@
 <div class="card">
     <div class="table-responsive">
         <div class="mb-2">
-            <button type="button" class="btn btn-success btn-sm" onclick="editSell(0)">添加分类</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="editCategory(0)">添加分类</button>
         </div>
         <table class="table table-bordered table-striped table-sm table-hover text-center">
             <thead class="thead-light">
             <tr>
-                <th>标题</th>
-                <th>行业</th>
-                <th>类型</th>
-                <th>缩略图</th>
-                <th>价格</th>
-                <th>会员</th>
-                <th>添加时间</th>
-                <th>浏览</th>
+                <th>ID</th>
+                <th>分类名称</th>
+                <th>排序</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            {volist name='sell' id='vo'}
+            {volist name='category_list' id='vo'}
             <tr>
-                <td>{$vo.title}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{$vo.price}</td>
-                <td>{$vo.username}</td>
-                <td>{$vo.add_date}</td>
-                <td>{$vo.hits}</td>
+                <td>{$vo.id}</td>
+                <td>{$vo.title_show|raw}</td>
+                <td>{$vo.sort}</td>
                 <td>
-                    <i class="fas fa-edit cursor-pointer" onclick="editSell('{$vo.id}')"></i>
-                    <i class="fas fa-trash cursor-pointer" onclick="deleteSell('{$vo.id}')"></i>
+                    <i class="fas fa-edit cursor-pointer" onclick="editCategory('{$vo.id}')"></i>
+                    <i class="fas fa-trash cursor-pointer" onclick="deleteCategory('{$vo.id}')"></i>
                 </td>
             </tr>
             {/volist}
             </tbody>
         </table>
-        {$sell|raw}
     </div>
 </div>
 
 <script type="text/javascript">
-    function sellList(){
-        _p_a_load("{:url('/admin/sell/sellList')}",'tab1');
+    function categoryList(){
+        _p_a_load("{:url('/admin/sell/category')}",'tab1');
     }
 
-    function editSell(id){
-        var title = id>0?'编辑供应':'添加供应';
-        var url = '/admin/sell/editSell?id='+id;
-        _add_movable_popup('edit_sell',title,url,'','',function(){
-            sellList();
-        });
+    function editCategory(id){
+        var url = '/admin/sell/editCategory?id='+id;
+        _add_movable_popup('editCategory',id>0?'编辑分类':'添加分类',url,['500px','300px'],'',function(){
+            categoryList();
+        },false);
     }
 
-    function deleteSell(id){
-        _systemConfirm('确定删除该供应信息吗？',function(){
+    function deleteCategory(id){
+        _systemConfirm('确认删除该分类吗？',function(){
             if(op_start()){
                 $.ajax({
                     dataType:"text",
                     type: "post",
-                    url: "{:url('/admin/sell/deleteSell')}",
+                    url: "{:url('/admin/sell/deleteCategory')}",
                     data: {id:id},
                     success: function(res){
                         if(res>0){
-                            sellList();
+                            categoryList();
                             tip_success('删除成功！');
                         }else{
                             tip_error('删除失败！',3);

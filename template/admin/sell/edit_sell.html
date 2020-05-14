@@ -19,7 +19,7 @@
                 <label class="col-sm-2 col-form-label"><span class="text-danger">*</span> 标题</label>
                 <div class="col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="标题">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="标题" value="{$sell.title}">
                         &nbsp;
                         <select class="form-control col-2" name="level" id="level">
                             <option value="0" selected>级别</option>
@@ -35,7 +35,7 @@
                         </select>
                         &nbsp;
                         <div id="set-color" class="mt-1 colorpicker-component">
-                            <input hidden type="text" name="title_color" id="title_color" value="#ffffff" class="form-control"/>
+                            <input type="hidden" name="title_color" id="title_color" value="#ffffff" class="form-control"/>
                             <span class="input-group-addon input-group-text"><i></i></span>
                         </div>
                     </div>
@@ -46,8 +46,10 @@
                 <label for="cat_id" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 行业分类</label>
                 <div class="col-sm-4">
                     <select class="form-control" name="cat_id" id="cat_id">
-                        <option value="0" selected>请选择</option>
-                        <option value="1">默认分类</option>
+                        <option value="0">请选择</option>
+                        {volist name="category_list" id="vo"}
+                        <option value="{$vo.id}" {eq name="sell.cat_id" value="$vo.id"}selected{/eq}>{$vo.title_show|raw}</option>
+                        {/volist}
                     </select>
                 </div>
             </div>
@@ -55,7 +57,7 @@
             <div class="form-group row">
                 <label for="brand" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品品牌</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="brand" id="brand" placeholder="产品品牌">
+                    <input type="text" class="form-control" name="brand" id="brand" placeholder="产品品牌" value="{$sell.brand}">
                 </div>
             </div>
 

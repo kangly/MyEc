@@ -3833,19 +3833,6 @@ CREATE TABLE `ec_sell_data` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应内容';
 
-DROP TABLE IF EXISTS `ec_sell_category`;
-
-CREATE TABLE `ec_sell_category` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0',
-  `arrparentid` varchar(255) NOT NULL DEFAULT '',
-  `child` tinyint(1) NOT NULL DEFAULT '0',
-  `arrchildid` text NOT NULL,
-  `listorder` smallint(4) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应行业分类';
-
 DROP TABLE IF EXISTS `ec_setting`;
 
 CREATE TABLE `ec_setting` (
@@ -3854,3 +3841,16 @@ CREATE TABLE `ec_setting` (
   `item_value` text NOT NULL COMMENT '键值',
   KEY `item` (`item`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='网站设置';
+
+DROP TABLE IF EXISTS `ec_sell_category`;
+
+CREATE TABLE `ec_sell_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应行业分类表id',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类id',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类排序',
+  `admin_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建人id',
+  `create_time` timestamp NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应行业分类';

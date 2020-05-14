@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="card m-t-10">
+    <form class="form-horizontal" method="post" id="admin-edit-category-form" action="{:url('/admin/sell/saveCategory')}">
+        <div class="card-body p-t-0">
+            <div class="form-group row">
+                <label for="pid" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 上级分类</label>
+                <div class="col-sm-8">
+                    <select id="pid" name="pid" class="form-control">
+                        <option value="0">请选择</option>
+                        {volist name="category_list" id="vo"}
+                        <option value="{$vo.id}" {eq name="category.pid" value="$vo.id"}selected{/eq}>{$vo.title_show|raw}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
 
-</body>
-</html>
+            <div class="form-group row">
+                <label for="title" class="col-sm-3 col-form-label"><span class="text-danger">*</span> 分类名称</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="title" id="title" value="{$category.title}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sort" class="col-sm-3 col-form-label"><span class="text-danger text-danger-hide">*</span> 分类排序</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="sort" id="sort" value="{$category.sort|default=0}">
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="id" value="{$category.id|default=0}">
+    </form>
+</div>
+
+<script type="text/javascript">
+    function save(callback){
+        if(_trim_assign($("#title"))==''){
+            tip_error('分类名称不能为空!');
+            return false;
+        }
+        submitTheForm('admin-edit-category-form',function(data){
+            if(data>0){
+                if(callback){
+                    callback();
+                }
+            }
+        });
+    }
+</script>
