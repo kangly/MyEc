@@ -10,7 +10,6 @@
  **************************提示********************************/
 
 (function () {
-
     /**
      * 编辑器资源文件根路径。它所表示的含义是：以编辑器实例化页面为当前路径，指向编辑器资源文件（即dialog等文件夹）的路径。
      * 鉴于很多同学在使用编辑器的时候出现的种种路径问题，此处强烈建议大家使用"相对于网站根目录的相对路径"进行配置。
@@ -54,10 +53,10 @@
 			'directionalityltr', 'directionalityrtl', 'indent', '|',
 			'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
 			'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-			'simpleupload', 'insertvideo', 'attachment', 'pagebreak', 'background', '|',
+			'simpleupload', 'attachment', 'pagebreak', '|',
 			'horizontal', 'date', 'time', '|',
 			'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-			'print', 'preview', 'help'
+			'preview'
 		]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
@@ -337,8 +336,6 @@
         //表格是否可以拖拽
         //,tableDragable: true
 
-
-
         //sourceEditor
         //源码的查看方式,codemirror 是代码高亮，textarea是文本框,默认是codemirror
         //注意默认codemirror只能在ie8+和非ie中使用
@@ -443,64 +440,42 @@
     };
 
     function getUEBasePath(docUrl, confUrl) {
-
         return getBasePath(docUrl || self.document.URL || self.location.href, confUrl || getConfigFilePath());
-
     }
 
     function getConfigFilePath() {
-
         var configPath = document.getElementsByTagName('script');
-
         return configPath[ configPath.length - 1 ].src;
-
     }
 
     function getBasePath(docUrl, confUrl) {
-
         var basePath = confUrl;
-
-
         if (/^(\/|\\\\)/.test(confUrl)) {
-
             basePath = /^.+?\w(\/|\\\\)/.exec(docUrl)[0] + confUrl.replace(/^(\/|\\\\)/, '');
-
         } else if (!/^[a-z]+:/i.test(confUrl)) {
-
             docUrl = docUrl.split("#")[0].split("?")[0].replace(/[^\\\/]+$/, '');
-
             basePath = docUrl + "" + confUrl;
-
         }
-
         return optimizationPath(basePath);
-
     }
 
     function optimizationPath(path) {
-
         var protocol = /^[a-z]+:\/\//.exec(path)[ 0 ],
             tmp = null,
             res = [];
 
         path = path.replace(protocol, "").split("?")[0].split("#")[0];
-
         path = path.replace(/\\/g, '/').split(/\//);
-
         path[ path.length - 1 ] = "";
-
         while (path.length) {
-
             if (( tmp = path.shift() ) === "..") {
                 res.pop();
             } else if (tmp !== ".") {
                 res.push(tmp);
             }
-
         }
 
         return protocol + res.join("/");
-
     }
 
     window.UE = {
