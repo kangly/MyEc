@@ -26,7 +26,7 @@ class Sell extends Admin
      */
     public function sellList()
     {
-        $fields = 'id,cat_id,type_id,title,thumb1,price,user_id,username,hits,add_date';
+        $fields = 'id,cat_id,type_id,title,thumb1,price,member_id,username,hits,add_date';
         $sell = model('admin/Sell')->getSell([],$fields,20);
         $this->assign('sell',$sell);
 
