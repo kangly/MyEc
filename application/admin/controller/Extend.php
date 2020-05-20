@@ -20,6 +20,16 @@ class Extend extends Admin
         return $this->fetch();
     }
 
+    public function announce()
+    {
+        return $this->fetch();
+    }
+
+    public function announceList()
+    {
+        return $this->fetch();
+    }
+
     public function link()
     {
         return $this->fetch();
