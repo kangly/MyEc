@@ -51,10 +51,13 @@ class Sell extends Admin
 
     public function saveSell()
     {
-        echo 200;
+        $sell = new \app\admin\service\Sell();
+        $res = $sell->storeSell();
+
+        echo $res;
     }
 
-    public function deleteSell()
+    public function deleteSell(Request $request)
     {
         echo 'success';
     }

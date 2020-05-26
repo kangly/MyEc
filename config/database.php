@@ -13,9 +13,9 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    //'hostname'        => '127.0.01',
+    'hostname'        => '127.0.01',
     // 服务器地址（使用docker）
-    'hostname'        => 'mysql_5.7',
+    //'hostname'        => 'mysql_5.7',
     // 数据库名
     'database'        => 'ec',
     // 用户名

@@ -15,9 +15,9 @@
 
 return [
     // redis主机
-    //'host'           => '127.0.0.1',
+    'host'           => '127.0.0.1',
     // redis主机
-    'host'           => 'redis_6.0',
+    //'host'           => 'redis_6.0',
     // redis端口
     'port'           => 6379,
     'id'             => '',

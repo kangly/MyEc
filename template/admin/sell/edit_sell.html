@@ -2,15 +2,11 @@
     <form class="form-horizontal" method="post" id="admin-edit-sell-form" action="{:url('/admin/sell/saveSell')}">
         <div class="card-body p-t-0">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span class="text-danger">*</span> 信息类型</label>
+                <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 信息类型</label>
                 <div class="col-sm-10 m-t-5">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="type_id" id="type_id_0" value="0" checked>
-                        <label class="form-check-label" for="type_id_0">信息1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="type_id" id="type_id_1" value="1">
-                        <label class="form-check-label" for="type_id_1">信息2</label>
+                        <label class="form-check-label" for="type_id_0">供应</label>
                     </div>
                 </div>
             </div>
@@ -21,7 +17,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="title" id="title" placeholder="标题" value="{$sell.title}">
                         &nbsp;
-                        <select class="form-control col-2" name="level" id="level">
+                        <select class="form-control col-2" name="level">
                             <option value="0" selected>级别</option>
                             <option value="1">1级[推荐]</option>
                             <option value="2">2级</option>
@@ -35,7 +31,7 @@
                         </select>
                         &nbsp;
                         <div id="set-color" class="mt-1 colorpicker-component">
-                            <input type="hidden" name="title_color" id="title_color" value="#ffffff" class="form-control"/>
+                            <input type="hidden" name="style" value="#ffffff" class="form-control"/>
                             <span class="input-group-addon input-group-text"><i></i></span>
                         </div>
                     </div>
@@ -47,9 +43,20 @@
                 <div class="col-sm-4">
                     <select class="form-control" name="cat_id" id="cat_id">
                         <option value="0">请选择</option>
+                        <option value="1">默认分类</option>
                         {volist name="category_list" id="vo"}
                         <option value="{$vo.id}" {eq name="sell.cat_id" value="$vo.id"}selected{/eq}>{$vo.title_show|raw}</option>
                         {/volist}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="area_id" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 所在地区</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="area_id" id="area_id">
+                        <option value="0" selected>请选择</option>
+                        <option value="1">默认地区</option>
                     </select>
                 </div>
             </div>
@@ -62,11 +69,11 @@
             </div>
 
             <div class="form-group row">
-                <label for="thumb" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品图片</label>
+                <label for="thumb1" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品图片</label>
                 <div class="col-sm-4">
-                    <input type="hidden" name="thumb" id="thumb" value="">
                     <input type="hidden" name="thumb1" id="thumb1" value="">
                     <input type="hidden" name="thumb2" id="thumb2" value="">
+                    <input type="hidden" name="thumb3" id="thumb3" value="">
                     <table width="360" class="table table-sm">
                         <tbody>
                         <tr align="center" height="120">
@@ -107,7 +114,7 @@
                 <div class="col-sm-10">
                     <script id="content" style="width: 750px;height: 450px;" type="text/plain"></script>
                     <script type="text/javascript">
-                        var ue = UE.getEditor('content',{zIndex:19891015});
+                        var ue = UE.getEditor('content',{zIndex:19891015,autoHeightEnabled:false});
                     </script>
                     <input type="hidden" name="content" id="editor_content" value="">
                 </div>
@@ -119,7 +126,7 @@
                     <input type="text" class="form-control" id="to_time" name="to_time" readonly value="">
                 </div>
                 <div class="m-l-20">
-                    <select onchange="" class="form-control" name="post_to_time" id="post_to_time">
+                    <select onchange="" class="form-control" id="post_to_time">
                         <option value="" selected>快捷选择</option>
                         <option value="">长期有效</option>
                         <option value="">3天</option>
@@ -138,7 +145,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 主要参数</label>
                 <div class="col-sm-4">
-                    <table class="table table-bordered table-sm">
+                    <table class="table table-bordered table-sm text-center">
                         <thead>
                             <tr>
                                 <th>参数名称</th>
@@ -219,117 +226,26 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span class="text-danger">*</span> 会员信息</label>
+                <label for="username" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 会员名</label>
+                <div class="col-sm-4">
+                    <input type="hidden" name="member_id" id="member_id" value="1">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="会员名">
+                </div>
+                <div class="m-t-7">
+                    <a href="javascript:void(0);" onclick="" class="btn-link">[资料]</a>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 会员推荐产品</label>
                 <div class="col-sm-4 m-t-5">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="is_member" id="is_member_0" value="0" checked>
-                        <label class="form-check-label" for="is_member_0">是</label>
+                        <input class="form-check-input" type="radio" name="elite" id="elite_1" value="1">
+                        <label class="form-check-label" for="elite_1">是</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="is_member" id="is_member_1" value="1">
-                        <label class="form-check-label" for="is_member_1">否</label>
-                    </div>
-                </div>
-            </div>
-
-            <div id="is_member_div_0" class="hide">
-                <div class="form-group row">
-                    <label for="company" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 公司名称</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="company" id="company" placeholder="公司名称">
-                    </div>
-                    <div class="m-t-7">个人请填姓名 例如：张三</div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="area_id" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 所在地区</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" name="area_id" id="area_id">
-                            <option value="0" selected>请选择</option>
-                            <option value="1">默认地区</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="true_name" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 联系人</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="true_name" id="true_name" placeholder="联系人">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="mobile" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 联系手机</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="联系手机">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 电子邮件</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="email" id="email" placeholder="电子邮件">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="telephone" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 联系电话</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="telephone" id="telephone" placeholder="联系电话">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="address" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 联系地址</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="address" id="address" placeholder="联系地址">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="qq" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> QQ</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="wx" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 微信</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="wx" id="wx" placeholder="微信">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="ali" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 阿里旺旺</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ali" id="ali" placeholder="阿里旺旺">
-                    </div>
-                </div>
-            </div>
-
-            <div id="is_member_div_1" class="show">
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><span class="text-danger">*</span> 会员名</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="会员名">
-                    </div>
-                    <div class="m-t-7">
-                        <a href="javascript:void(0);" onclick="" class="btn-link">[资料]</a>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 会员推荐产品</label>
-                    <div class="col-sm-4 m-t-5">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="elite" id="elite_1" value="1">
-                            <label class="form-check-label" for="elite_1">是</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="elite" id="elite_0" value="0" checked>
-                            <label class="form-check-label" for="elite_0">否</label>
-                        </div>
+                        <input class="form-check-input" type="radio" name="elite" id="elite_0" value="0" checked>
+                        <label class="form-check-label" for="elite_0">否</label>
                     </div>
                 </div>
             </div>
@@ -361,26 +277,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="add_time" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 添加时间</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" id="add_time" name="add_time" readonly value="">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label for="hits" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 浏览次数</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="hits" id="hits" placeholder="浏览次数">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="fee" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 内容收费</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" name="fee" id="fee" placeholder="内容收费">
-                </div>
-                <div class="m-t-7">
-                    <i class="fas fa-bell small" data-toggle="tooltip" data-placement="top" data-original-title="不填或填0表示继承模块设置价格，-1表示不收费 大于0的数字表示具体收费价格" onclick="_systemTips(this)"></i>
+                    <input type="text" class="form-control" name="hits" id="hits" placeholder="浏览次数" readonly value="{$edit.hits|default=0}">
                 </div>
             </div>
         </div>
@@ -423,30 +322,13 @@
 
         $('#to_time').datetimepicker({
             language: "zh-CN",
-            autoclose: true,
-            format: "yyyy-mm-dd hh:ii:ss"
-        });
-
-        $('#add_time').datetimepicker({
-            language: "zh-CN",
-            autoclose: true,
-            format: "yyyy-mm-dd hh:ii:ss"
-        });
-
-        $('#admin-edit-sell-form input[name="is_member"]').click(function(){
-            if($(this).val()==1){
-                $('#is_member_div_0').show();
-                $('#is_member_div_1').hide();
-            }else{
-                $('#is_member_div_0').hide();
-                $('#is_member_div_1').show();
-            }
+            format: "yyyy-mm-dd hh:ii:ss",
+            autoclose: true
         });
     });
     
     function addImage(){
-        var url = '/admin/common/uploadImage';
-        _add_movable_popup('addImage','上传图片',url,['300px','200px'],'',function(){},false);
+        _add_movable_popup('addImage','上传图片','/admin/common/uploadImage',['300px','200px'],'',function(){},false);
     }
 
     function delImage(){
@@ -458,8 +340,7 @@
     }
 
     function save(callback){
-        //alert($('#title_color').val());
-        //alert(UE.getContent());
+        $('#editor_content').val(ue.getContent());
         submitTheForm('admin-edit-sell-form',function(data){
             if(data>0){
                 if(callback){
