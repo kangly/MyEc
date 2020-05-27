@@ -3792,28 +3792,27 @@ CREATE TABLE `ec_sell` (
   `min_amount` float unsigned NOT NULL DEFAULT '0' COMMENT '起定量',
   `amount` float unsigned NOT NULL DEFAULT '0' COMMENT '供货总量',
   `days` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '供货时间',
-  `tags` varchar(100) NOT NULL DEFAULT '' COMMENT '产品标签',
-  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
   `hits` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击次数',
   `thumb1` varchar(255) NOT NULL DEFAULT '' COMMENT '产品图1',
   `thumb2` varchar(255) NOT NULL DEFAULT '' COMMENT '产品图2',
   `thumb3` varchar(255) NOT NULL DEFAULT '' COMMENT '产品图3',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态,默认0待审、1通过、2拒绝、3过期、4删除',
-  `add_date` timestamp NULL DEFAULT NULL COMMENT '添加时间',
+  `add_time` timestamp DEFAULT NULL COMMENT '添加时间',
+  `expire_date` date DEFAULT NULL COMMENT '过期时间',
   `editor` varchar(50) NOT NULL DEFAULT '' COMMENT '编辑人',
-  `edit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
-  `to_time` timestamp NULL DEFAULT NULL COMMENT '过期时间',
+  `edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
   PRIMARY KEY (`id`),
   KEY `cat_id` (`cat_id`),
   KEY `area_id` (`area_id`),
   KEY `member_id` (`member_id`),
-  KEY `edit_date` (`edit_date`)
+  KEY `expire_date` (`expire_date`),
+  KEY `edit_time` (`edit_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应';
 
 DROP TABLE IF EXISTS `ec_sell_data`;
 
 CREATE TABLE `ec_sell_data` (
-  `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '供应表id',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应表id',
   `content` mediumtext NOT NULL COMMENT '供应内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应内容';

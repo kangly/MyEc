@@ -6,16 +6,15 @@
             </div>
         </div>
         <input type="hidden" name="_method" value="POST">
-        <input type="hidden" name="id" value="0">
     </form>
 </div>
 
 <script type="text/javascript">
     function save(callback){
         submitTheForm('admin-upload-image-form',function(data){
-            if(data>0){
+            if(data.code==200){
                 if(callback){
-                    callback();
+                    callback({img_path: data.img_path,thumb_path: data.thumb_path});
                 }
             }
         });

@@ -13,11 +13,22 @@
 use think\facade\Config;
 
 /**
- * 返回当前时间
- * @return bool|string
+ * 返回时间 Y-m-d H:i:s
+ * @param string $param
+ * @param int $is_time
+ * @return false|string
  */
-function _time(){
-    return date('Y-m-d H:i:s');
+function _time($param='',$is_time=0){
+    if($param){
+        $timestamp = strtotime($param);
+    }else{
+        $timestamp = time();
+    }
+    if($is_time==0){
+        return date('Y-m-d H:i:s',$timestamp);
+    }else{
+        return date('Y-m-d',$timestamp);
+    }
 }
 
 /**

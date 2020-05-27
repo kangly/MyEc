@@ -600,16 +600,12 @@ function submitTheForm(formId,callback,url){
     if(op_start()){
         $('#'+formId).ajaxSubmit({success: function (data) {
             op_end();
-            if(data && data.error==0){
-                if(data.error==0){
-                    tip_success('添加/修改成功！',2);
-                    if(url){
-                        urlLocation(url);
-                    }else{
-                        callback && callback(data);
-                    }
+            if(data && data.code==200){
+                tip_success('添加/修改成功！',2);
+                if(url){
+                    urlLocation(url);
                 }else{
-                    tip(data.msg,5);
+                    callback && callback(data);
                 }
             }else if(data == 'success'){
                 tip_success('添加/修改成功！',2);
@@ -838,9 +834,9 @@ function _add_movable_popup(mark,title,url,area,offset,callback,max_min){
                 yes: function(index, layero){
                     //目前默认页面保存方法都是save方法
                     //执行回调方法并关闭弹层
-                    save(function(){
+                    save(function(data){
                         if(callback){
-                            callback();
+                            callback(data);
                             setTimeout(function(){layer.close(index)},200);
                         }
                     });

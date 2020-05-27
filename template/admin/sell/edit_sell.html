@@ -71,37 +71,37 @@
             <div class="form-group row">
                 <label for="thumb1" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 产品图片</label>
                 <div class="col-sm-4">
-                    <input type="hidden" name="thumb1" id="thumb1" value="">
-                    <input type="hidden" name="thumb2" id="thumb2" value="">
-                    <input type="hidden" name="thumb3" id="thumb3" value="">
+                    <input type="hidden" name="thumb1" id="thumb1" data-img-path="" value="">
+                    <input type="hidden" name="thumb2" id="thumb2" data-img-path="" value="">
+                    <input type="hidden" name="thumb3" id="thumb3" data-img-path="" value="">
                     <table width="360" class="table table-sm">
                         <tbody>
                         <tr align="center" height="120">
                             <td width="120">
-                                <img src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
+                                <img id="show_thumb1" src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
                             </td>
                             <td width="120">
-                                <img src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
+                                <img id="show_thumb2" src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
                             </td>
                             <td width="120">
-                                <img src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
+                                <img id="show_thumb3" src="/static/images/wait_pic.gif" width="100" height="100" title="预览图片" onclick="showImage()">
                             </td>
                         </tr>
                         <tr align="center">
                             <td>
-                                <i onclick="addImage()" class="mdi mdi-upload" title="上传"></i>
+                                <i onclick="addImage('thumb1')" class="mdi mdi-upload" title="上传"></i>
                                 &nbsp;&nbsp;
-                                <i onclick="delImage()" class="mdi mdi-delete" title="删除"></i>
+                                <i onclick="delImage('thumb1')" class="mdi mdi-delete" title="删除"></i>
                             </td>
                             <td>
-                                <i onclick="addImage()" class="mdi mdi-upload" title="上传"></i>
+                                <i onclick="addImage('thumb2')" class="mdi mdi-upload" title="上传"></i>
                                 &nbsp;&nbsp;
-                                <i onclick="delImage()" class="mdi mdi-delete" title="删除"></i>
+                                <i onclick="delImage('thumb2')" class="mdi mdi-delete" title="删除"></i>
                             </td>
                             <td>
-                                <i onclick="addImage()" class="mdi mdi-upload" title="上传"></i>
+                                <i onclick="addImage('thumb3')" class="mdi mdi-upload" title="上传"></i>
                                 &nbsp;&nbsp;
-                                <i onclick="delImage()" class="mdi mdi-delete" title="删除"></i>
+                                <i onclick="delImage('thumb3')" class="mdi mdi-delete" title="删除"></i>
                             </td>
                         </tr>
                         </tbody>
@@ -122,19 +122,19 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 过期时间</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" id="to_time" name="to_time" readonly value="">
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="expire_date" name="expire_date" readonly value="">
                 </div>
-                <div class="m-l-20">
-                    <select onchange="" class="form-control" id="post_to_time">
-                        <option value="" selected>快捷选择</option>
+                <div class="m-l-10">
+                    <select onchange="set_expire_date(this)" class="form-control">
+                        <option value="">快捷选择</option>
                         <option value="">长期有效</option>
-                        <option value="">3天</option>
-                        <option value="">一周</option>
-                        <option value="">半月</option>
-                        <option value="">一月</option>
-                        <option value="">半年</option>
-                        <option value="">一年</option>
+                        <option value="{$three_days}">3天</option>
+                        <option value="{$a_week}">一周</option>
+                        <option value="{$half_month}">半月</option>
+                        <option value="{$a_month}">一月</option>
+                        <option value="{$half_year}">半年</option>
+                        <option value="{$a_year}">一年</option>
                     </select>
                 </div>
                 <div class="m-t-7">
@@ -275,13 +275,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label for="hits" class="col-sm-2 col-form-label"><span class="text-danger text-danger-hide">*</span> 浏览次数</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" name="hits" id="hits" placeholder="浏览次数" readonly value="{$edit.hits|default=0}">
-                </div>
-            </div>
         </div>
         <input type="hidden" name="_method" value="POST">
         <input type="hidden" name="id" value="0">
@@ -320,19 +313,51 @@
             }
         );
 
-        $('#to_time').datetimepicker({
-            language: "zh-CN",
-            format: "yyyy-mm-dd hh:ii:ss",
-            autoclose: true
+        laydate.render({
+            elem: '#expire_date'
         });
     });
+
+    function set_expire_date(obj){
+        $('#expire_date').val($(obj).val());
+    }
     
-    function addImage(){
-        _add_movable_popup('addImage','上传图片','/admin/common/uploadImage',['300px','200px'],'',function(){},false);
+    function addImage(id){
+        _add_movable_popup('addImage','上传图片','/admin/common/uploadImage',['300px','200px'],'',function(data){
+            $('#'+id).val(data.thumb_path);
+            $('#'+id).attr('data-img-path',data.img_path);
+            $('#show_'+id).attr('src',data.thumb_path);
+        },false);
     }
 
-    function delImage(){
-
+    function delImage(id){
+        if($('#'+id).val()!=''){
+            _systemConfirm('确定删除该产品图片吗？此操作不可撤销！',function(){
+                if(op_start()){
+                    $.ajax({
+                        dataType:"text",
+                        type: "post",
+                        url: "{:url('/admin/common/delImage')}",
+                        data: {
+                            img_path:$('#'+id).attr('data-img-path'),
+                            thumb_path:$('#'+id).val()
+                        },
+                        success: function(res){
+                            if(res=='success'){
+                                $('#'+id).val('');
+                                $('#'+id).attr('data-img-path','');
+                                $('#show_'+id).attr('src','/static/images/wait_pic.gif');
+                                tip_success('删除成功！');
+                            }else{
+                                tip_error(res,3);
+                            }
+                        }
+                    }).always(function(){
+                        op_end();
+                    });
+                }
+            });
+        }
     }
     
     function showImage(){

@@ -26,7 +26,7 @@ class Sell extends Admin
      */
     public function sellList()
     {
-        $fields = 'id,cat_id,type_id,title,thumb1,price,member_id,username,hits,add_date';
+        $fields = 'id,cat_id,type_id,title,thumb1,price,member_id,username,hits,add_time';
         $sell = model('admin/Sell')->getSell([],$fields,20);
         $this->assign('sell',$sell);
 
@@ -45,6 +45,13 @@ class Sell extends Admin
         $category_data = model('admin/SellCategory')->getCategory()->toArray();
         $category_list = Tree::build($category_data)->getRootFormat();
         $this->assign('category_list',$category_list);
+
+        $this->assign('three_days',_time('+3 days',1));
+        $this->assign('a_week',_time('+1 week',1));
+        $this->assign('half_month',_time('+15 days',1));
+        $this->assign('a_month',_time('+1 month',1));
+        $this->assign('half_year',_time('+6 months',1));
+        $this->assign('a_year',_time('+1 year',1));
 
         return $this->fetch();
     }

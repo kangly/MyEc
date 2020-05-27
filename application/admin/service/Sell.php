@@ -2,10 +2,10 @@
 
 namespace app\admin\service;
 
+use app\admin\controller\Admin;
 use think\facade\Request;
-use think\Model;
 
-class Sell
+class Sell extends Admin
 {
     public function storeSell()
     {
@@ -45,7 +45,7 @@ class Sell
             'thumb2' => $thumb2,
             'thumb3' => $thumb3,
             'introduce' => $introduce,
-            'to_time' => Request::param('to_time'),
+            'expire_date' => Request::param('expire_date',NULL),
             'n1' => Request::param('n1'),
             'v1' => Request::param('v1'),
             'n2' => Request::param('n2'),
@@ -58,8 +58,7 @@ class Sell
             'amount' => Request::param('amount'),
             'days' => Request::param('days'),
             'elite' => Request::param('elite'),
-            'status' => Request::param('status'),
-            'add_date' => date('Y-m-d H:i:s'),
+            'status' => Request::param('status')
         ];
 
         $sell_data = [
@@ -70,11 +69,12 @@ class Sell
             $sell = model('admin/Sell');
             $sellData = model('admin/SellData');
             if($id>0){
-                $sell->where(['id'=>$id])->save($data);
-                $sellData->where(['id'=>$id])->save($sell_data);
+                $data['editor'] = $this->userInfo['id'];
+                $sell->save($data,['id'=>$id]);
+                $sellData->save($sell_data,['id'=>$id]);
             }else{
-                $sell->insert($data);
-                $id = $sell->getLastInsID();
+                $data['add_time'] = _time();
+                $id = $sell->insertGetId($data);
                 if($id>0){
                     $sell_data['id'] = $id;
                     $sellData->insert($sell_data);

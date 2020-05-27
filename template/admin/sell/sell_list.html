@@ -33,7 +33,7 @@
                 <td></td>
                 <td>{$vo.price}</td>
                 <td>{$vo.username}</td>
-                <td>{$vo.add_date}</td>
+                <td>{$vo.add_time}</td>
                 <td>{$vo.hits}</td>
                 <td>
                     <i class="fas fa-edit cursor-pointer" onclick="editSell('{$vo.id}')"></i>
@@ -53,9 +53,8 @@
     }
 
     function editSell(id){
-        var title = id>0?'编辑供应':'添加供应';
-        var url = '/admin/sell/editSell?id='+id;
-        _add_movable_popup('edit_sell',title,url,'','',function(){
+        var url = "{:url('/admin/sell/editSell?id="+id+"','',false)}";
+        _add_movable_popup('edit_sell',id>0?'编辑供应':'添加供应',url,'','',function(){
             sellList();
         });
     }
